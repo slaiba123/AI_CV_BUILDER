@@ -1,0 +1,13 @@
+resume
+example
+templates
+html pages
+input form
+
+home
+nav signup login
+user/recruiter
+intro
+resume builder and cover letter
+AI feature(Cv enhancer, AI writing, linked in,proofreading,recommend relevant jobs)
+recruiter(job description matching , ranking)  

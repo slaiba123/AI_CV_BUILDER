@@ -7,7 +7,7 @@ const ArchShape = () => {
     <div className="relative h-[60%] overflow-hidden">
       {/* Arc (Background) */}
       {/* <div className="absolute inset-0 bg-[#7fb3d5] rounded-b-full opacity-80 w-[70%] h-[130%] -top-[50%] -right-[50%] z-0"></div> */}
-      <div className="absolute inset-0 bg-[#7fb3d5] rounded-b-full opacity-80 w-[80%] h-[130%] -top-[50%] left-[50%] transform -translate-x-1/2 z-0"></div>
+      <div className="absolute inset-0 bg-[#7fb3d5] rounded-b-full opacity-80 w-[90%] h-[110%] -top-[50%] left-[50%] transform -translate-x-1/2 z-0"></div>
 
 
 
@@ -47,11 +47,12 @@ const ArchShape = () => {
           <p className="text-gray-600 mr-12">Polished look, optimal readability.</p>
         </div>
       </div>
-      
-    </div>
-    <div className='w-[100%] h-[50%] flex justify-center items-center mt-10'>
+      <div className=' relative w-[100%] h-[50%] flex justify-center items-center mt-20 z-10'>
   <img src="Tech_Savvy.jpg" alt="" class="w-[30%] h-[50%]" />
 </div>
+      
+    </div>
+  
     </div>
   );
 };
