@@ -1,28 +1,33 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import ArchShape from './landingpage'
-import Functionalities from './features'
-import Comparison from './comparision'
-import FAQ from './FAQs'
-import CVslide from './CV-slide'
-import  BuilderSection from './COMPONENTS/builder_section'
+// import ArchShape from './COMPONENTS/landingpage'
+// import Functionalities from './COMPONENTS/features'
+// import Comparison from './COMPONENTS/comparision'
+// import FAQ from './COMPONENTS/FAQs'
+// import CVslide from './COMPONENTS/CV-slide'
+// import  BuilderSection from './COMPONENTS/builder_section'
 import Navbar from './COMPONENTS/navbar'
-import Footer from './COMPONENTS/footer'
+// import Footer from './COMPONENTS/footer'
+import InputForm from './input_form'
+import TemplateSelect from './pageselect'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-    <Navbar/>
-    <ArchShape/>
+     <Navbar/>
+    {/*<ArchShape/>
     <Comparison/>
     <Functionalities/>
     <FAQ/>
     <CVslide/>
     <BuilderSection/>
-    <Footer/>
+    <Footer/> */}
+    {/* <InputForm/> */}
+    <TemplateSelect/>
+
     </>
   )
 }
