@@ -1,0 +1,12 @@
+/* Initially, the card is translated down and hidden */
+.card {
+  opacity: 0;
+  transform: translateY(50px); /* Adjust this value for how far below it starts */
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth transition */
+}
+
+/* Final state after entering the viewport */
+.card.visible {
+  opacity: 1;
+  transform: translateY(0); /* Slide up to the normal position */
+}

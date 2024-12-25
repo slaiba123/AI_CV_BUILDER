@@ -1,4 +1,6 @@
 import React from 'react';
+import Navbar from '../COMPONENTS/navbar'
+import Footer from '../COMPONENTS/footer'
 
 const ResumePage = () => {
   const resGenerate = (template) => {
@@ -7,6 +9,9 @@ const ResumePage = () => {
   };
 
   return (
+     <>
+          <Navbar/>
+      
     <div className="bg-white">
       <section className="text-center py-16">
         <div className="intro">
@@ -81,6 +86,8 @@ const ResumePage = () => {
         </button>
       </section>
     </div>
+    <Footer/>
+    </>
   );
 };
 

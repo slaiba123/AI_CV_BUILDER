@@ -1,11 +1,11 @@
 import React from 'react';
 
-const intro= () => {
+const Intro = () => {
   return (
     <div>
       <div className="relative h-[100%]">
         {/* Arc (Background) */}
-        <div className="absolute inset-0 bg-[#7fb3d5] rounded-b-full opacity-80 w-[100%] h-[150%] -top-[40%] left-[20%] transform -translate-x-1/2 z-0"></div>
+        <div className="absolute inset-0 bg-[#7fb3d5] rounded-b-full opacity-80 w-[100%] h-[150%] -top-[40%] left-[20%] transform -translate-x-1/2 z-[-10]"></div>
 
         {/* Text and Image Section */}
         <div className="relative z-10 flex h-full items-center  ">
@@ -29,7 +29,7 @@ const intro= () => {
 
           {/* Image Section */}
           <div className="flex-1 flex justify-center items-center mt-20">
-            <img src="/Tech_Savvy.jpg" alt="Tech Savvy" className="w-full h-[600px] object-contain rounded-lg border-black" />
+            <img src="/introimg.png" alt="" className="w-[70%] h-[600px] object-contain rounded-lg border-black" />
           </div>
         </div>
       </div>
@@ -37,4 +37,4 @@ const intro= () => {
   );
 };
 
-export default intro;
+export default Intro;
