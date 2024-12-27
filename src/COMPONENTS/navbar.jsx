@@ -120,7 +120,7 @@ export default function Navbar() {
               </div>
               <div>
                 <Link
-                  to="/CoverLetter_input"
+                  to="/coverletter_templates"
                   className="block font-bold hover:text-[#ADD8E6]"
                   onClick={handleLinkClick} // Close dropdown when clicked
                 >
