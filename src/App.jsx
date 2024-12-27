@@ -11,6 +11,7 @@ import SignupForm from './COMPONENTS/signup'
 import SignIn from './COMPONENTS/signin'
 import Coverletter from './PAGES/Coverletter'
 import CoverLetterInput from './PAGES/CoverLetter_input'
+import JobPostingForm from './COMPONENTS/JobPosting'
 import Rec_input from './PAGES/rec_input'
 
 
@@ -50,7 +51,13 @@ function App() {
     { path: "/signin",
       element: <><Navbar/> <SignIn /><Footer/> </> 
     },
-   
+    { path: "/job-posting",
+      element: <><Navbar/> <JobPostingForm /><Footer/> </> 
+    },
+    // { path: "/register",
+    //   element: <><Navbar/> <Register /><Footer/> </> 
+    // },*/}
+
 
   // const [count, setCount] = useState(0)
 

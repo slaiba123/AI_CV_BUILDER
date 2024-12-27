@@ -8,9 +8,9 @@ const Comparison = () => {
   };
 
   return (
-    <>
-    <h1 className='text-center text-3xl font-bold m-8'>Before & Better - Compare . Improve . Conquer 👑</h1>
-    <div className="flex justify-center items-center h-screen border-2 border-black">
+    <div className='bg-slate-300'>
+    <h1 className='text-center text-3xl font-bold p-5 bg-slate-300 '>Before & Better - Compare . Improve . Conquer 👑</h1>
+    <div className="flex justify-center items-center h-screen  bg-slate-300">
       
       <div className="relative w-[600px] h-[700px] overflow-hidden border-2 border-gray-300 rounded-lg bg-white">
         {/* Old Image (Left Side) */}
@@ -54,7 +54,7 @@ const Comparison = () => {
         ></div>
       </div>
     </div>
-    </>
+    </div>
   );
 };
 

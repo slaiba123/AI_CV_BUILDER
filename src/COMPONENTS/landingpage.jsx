@@ -23,7 +23,7 @@ const ArchShape = () => {
         <p className="text-lg font-roboto text-gray-600 mt-4">
           Every single part of your resume built to impress employers.
         </p>
-        <button className="mt-9 bg-[#2471a3] text-white px-6 py-3 rounded-sm text-lg font-medium hover:bg-[#2e86c1]" onClick={() => navigate("/resume_input")}>
+        <button className="mt-9 bg-[#2471a3] text-white px-6 py-3 rounded-sm text-lg font-medium hover:bg-[#2e86c1]" onClick={() => navigate("/templates")}>
           Create My Resume
         </button>
       </div>
