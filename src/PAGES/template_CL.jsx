@@ -24,7 +24,7 @@ const CL_templates = () => {
     <>
       <div className="bg-white">
         <section className="text-center py-16">
-          <h1 className="text-4xl font-bold text-[#1062a6] mb-4">Create a Job-Winning <br />Cover Letter in Minutes</h1>
+          <h1 className="text-4xl font-bold text-[#1062a6] mb-4">Create a Job-Winning Cover Letter in Minutes</h1>
           <p className="text-xl text-gray-700 mb-8">Create a Job-Winning Cover Letter in Minutes
           Use our professional cover letter templates to create a message that wows employers!</p>
 

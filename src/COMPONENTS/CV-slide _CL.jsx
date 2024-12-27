@@ -87,9 +87,9 @@ function CVslide() {
 
       <button
         className="mt-9 bg-[#2471a3] text-white px-6 py-3 rounded-sm text-lg font-medium hover:bg-[#2e86c1]"
-        onClick={() => navigate("/templates")} // Redirect on button click
+        onClick={() => navigate("/coverletter_templates")} // Redirect on button click
       >
-        Show Resume Templates
+        Show Cover Letter Templates
       </button>
     </div>
   );
