@@ -14,6 +14,7 @@ import CoverLetterInput from './PAGES/CoverLetter_input'
 import JobPostingForm from './COMPONENTS/JobPosting'
 import Rec_input from './PAGES/rec_input'
 import Jobsearch from './COMPONENTS/relevant_job'
+import CL_templates from './PAGES/template_CL'
 
 
 function App() {
@@ -30,9 +31,9 @@ function App() {
     { path: "/templates",
       element:  <><Navbar/><TemplateSelect/><Footer/> </>
      },
-    // { path: "/CL_templates",
-    //   element:  <><Navbar/><TemplateSelect/><Footer/> </>
-    //  },
+    { path: "/coverletter_templates",
+      element:  <><Navbar/><CL_templates/><Footer/> </>
+     },
     { path: "/recruiter",
       element: <><Navbar/> <Recruiter/><Footer/> </> 
     },

@@ -21,7 +21,7 @@ const ArchShape = () => {
           </p>
           <button
             className="mt-9 bg-[#2471a3] text-white px-6 py-3 rounded-sm text-lg font-medium hover:bg-[#2e86c1]"
-            onClick={() => navigate("/coverletter_input")}
+            onClick={() => navigate("/coverletter_templates")}
           >
             Create My Cover Letter
           </button>

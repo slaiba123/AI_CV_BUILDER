@@ -122,6 +122,13 @@ export default function Navbar() {
             </div>
           )}
         </div>
+        <Link
+          to="/jobs"
+          className="hover:text-[#ADD8E6] text-lg"
+          onClick={handleLinkClick} // Close dropdown when clicked
+        >
+          Jobs
+        </Link>
 
         {/* Other Links */}
         <Link

@@ -6,12 +6,18 @@ function CVslide() {
   const navigate = useNavigate();
 
   const images = [
-    { src: "/Bold_Statement.jpg", alt: "Resume 1", label: "Jane Jackson" },
-    { src: "/Classic_Elegance.jpg", alt: "Resume 2", label: "Donna Vader" },
-    { src: "/Modern_Edge.jpg", alt: "Resume 3", label: "Larry Bear" },
-    { src: "/Bold_Statement.jpg", alt: "Resume 4", label: "Jane Jackson" },
-    { src: "/Classic_Elegance.jpg", alt: "Resume 5", label: "Donna Vader" },
-    { src: "/Modern_Edge.jpg", alt: "Resume 6", label: "Larry Bear" },
+    { name: "Decent", src: "decent.png" },
+    { name: "Regular", src: "regular.png" },
+    { name: "Iconic", src: "iconic.png" },
+    { name: "Crisp", src: "crisp.png" },
+    { name: "Cubic", src: "cubic.png" },
+    { name: "Diamond", src: "diamond.png" },
+    { src: "decent.png", alt: "Coverletter 1", label: "Jane Jackson" },
+    { src: "regular.png", alt: "Coverletter 2", label: "Donna Vader" },
+    { src: "iconic.png", alt: "Coverletter 3", label: "Larry Bear" },
+    { src: "crisp.png" , alt: "Coverletter 4", label: "Jane Jackson" },
+    { src: "cubic.png", alt: "Coverletter 5", label: "Donna Vader" },
+    { src: "diamond.png", alt: "Coverletter 6", label: "Larry Bear" },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
