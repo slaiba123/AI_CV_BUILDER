@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar_Rec() {
   const [resumeDropdownOpen, setResumeDropdownOpen] = useState(false);
   const [coverLetterDropdownOpen, setCoverLetterDropdownOpen] = useState(false);
 
@@ -42,15 +42,14 @@ export default function Navbar() {
         <img src="logo.gif" alt="Logo" className="h-20 w-20 mr-2" />
         <span className="text-3xl font-bold">ResumeCraft</span>
       </div> */}
-       <div className="flex items-center">
-            <Link to="/">
-              <img src="logo.gif" alt="Logo" className="h-20 w-20 mr-2 cursor-pointer" />
-            </Link>
-            <Link to="/" className="text-3xl font-bold cursor-pointer">
-              ResumeCraft
-            </Link>
-          </div>
-      
+      <div className="flex items-center">
+      <Link to="/">
+        <img src="logo.gif" alt="Logo" className="h-20 w-20 mr-2 cursor-pointer" />
+      </Link>
+      <Link to="/" className="text-3xl font-bold cursor-pointer">
+        ResumeCraft
+      </Link>
+    </div>
 
       {/* Links */}
       <div className="flex items-center space-x-4">
@@ -63,33 +62,23 @@ export default function Navbar() {
               setCoverLetterDropdownOpen(false); // Close other dropdown
             }}
           >
-            <Link to="/resume" className="text-lg">
-              Resume
+            <Link to="/recruiter" className="text-lg">
+              Recruitment
             </Link>
           </button>
           {resumeDropdownOpen && (
             <div className="absolute bg-[#2471a3] text-white top-full mt-4 w-60 rounded shadow-lg p-4 translate-y-2 -translate-x-2 z-50">
               <div className="mb-4">
                 <Link
-                  to="/resume_input"
+                  to="/findcandidate"
                   className="block font-bold hover:text-[#ADD8E6]"
                   onClick={handleLinkClick} // Close dropdown when clicked
                 >
-                  Create Resume
+                  Find the perfect fit
                 </Link>
-                <p className="text-sm">Build resumes with an intuitive editor</p>
               </div>
-              <div>
-                <Link
-                  to="/templates"
-                  className="block font-bold hover:text-[#ADD8E6]"
-                  onClick={handleLinkClick} // Close dropdown when clicked
-                >
-                  Resume Samples
-                </Link>
-                <p className="text-sm">Get inspiration from samples</p>
               </div>
-            </div>
+            
           )}
         </div>
 
@@ -102,43 +91,11 @@ export default function Navbar() {
               setResumeDropdownOpen(false); // Close other dropdown
             }}
           >
-            <Link to="/coverletter" className="text-lg">
-              Cover Letter
+            <Link to="/job-posting" className="text-lg">
+              Job Posting 
             </Link>
           </button>
-          {coverLetterDropdownOpen && (
-            <div className="absolute bg-[#2471a3] text-white top-full mt-4 w-60 rounded shadow-lg p-4 translate-y-2 -translate-x-2 z-50">
-              <div className="mb-4">
-                <Link
-                  to="/CoverLetter_input"
-                  className="block font-bold hover:text-[#ADD8E6]"
-                  onClick={handleLinkClick} // Close dropdown when clicked
-                >
-                  Create Cover Letter
-                </Link>
-                <p className="text-sm">Craft personalized cover letters</p>
-              </div>
-              <div>
-                <Link
-                  to="/CoverLetter_input"
-                  className="block font-bold hover:text-[#ADD8E6]"
-                  onClick={handleLinkClick} // Close dropdown when clicked
-                >
-                  Cover Letter Samples
-                </Link>
-                <p className="text-sm">Explore professionally written examples</p>
-              </div>
-            </div>
-          )}
         </div>
-        <Link
-          to="/jobs"
-          className="hover:text-[#ADD8E6] text-lg"
-          onClick={handleLinkClick} // Close dropdown when clicked
-        >
-          Jobs
-        </Link>
-
         {/* Other Links */}
         <Link
           to="/signin"

@@ -15,6 +15,7 @@ import JobPostingForm from './COMPONENTS/JobPosting'
 import Rec_input from './PAGES/rec_input'
 import Jobsearch from './COMPONENTS/relevant_job'
 import CL_templates from './PAGES/template_CL'
+import Navbar_Rec from './COMPONENTS/navbar_rec'
 
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
       element:  <><Navbar/><CL_templates/><Footer/> </>
      },
     { path: "/recruiter",
-      element: <><Navbar/> <Recruiter/><Footer/> </> 
+      element: <><Navbar_Rec/> <Recruiter/><Footer/> </> 
     },
     { path: "/jobs",
       element: <><Navbar/> <Jobsearch/><Footer/> </> 
@@ -45,7 +46,7 @@ function App() {
       element:  <><Navbar/><SignupForm/><Footer/> </> 
     },
     { path: "/findcandidate",
-      element: <><Navbar/> <Rec_input /><Footer/> </> 
+      element: <><Navbar_Rec/> <Rec_input /><Footer/> </> 
     },
     { path: "/CoverLetter_input",
       element:  <><Navbar/>< CoverLetterInput/><Footer/> </> 
@@ -57,7 +58,7 @@ function App() {
       element: <><Navbar/> <SignIn /><Footer/> </> 
     },
     { path: "/job-posting",
-      element: <><Navbar/> <JobPostingForm /><Footer/> </> 
+      element: <><Navbar_Rec/> <JobPostingForm /><Footer/> </> 
     },
   
 
