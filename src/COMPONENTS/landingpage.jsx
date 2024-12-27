@@ -1,6 +1,7 @@
 import React from 'react';
-
+import { useNavigate } from 'react-router-dom';
 const ArchShape = () => {
+  const navigate = useNavigate();
   return (
   <div>
     {/* <div className="relative min-h-screen overflow-hidden"> */}
@@ -22,7 +23,7 @@ const ArchShape = () => {
         <p className="text-lg font-roboto text-gray-600 mt-4">
           Every single part of your resume built to impress employers.
         </p>
-        <button className="mt-9 bg-[#2471a3] text-white px-6 py-3 rounded-sm text-lg font-medium hover:bg-[#2e86c1]">
+        <button className="mt-9 bg-[#2471a3] text-white px-6 py-3 rounded-sm text-lg font-medium hover:bg-[#2e86c1]" onClick={() => navigate("/resume_input")}>
           Create My Resume
         </button>
       </div>

@@ -1,94 +1,90 @@
-import React from 'react';
-import Navbar from '../COMPONENTS/navbar'
-import Footer from '../COMPONENTS/footer'
+import React, { useState } from "react";
 
 const ResumePage = () => {
-  const resGenerate = (template) => {
-    // This function will handle the template selection logic
-    console.log(`Generate ${template} template`);
+  const [zoomImage, setZoomImage] = useState(null);
+
+  const handleZoom = (image) => {
+    setZoomImage(image);
   };
 
+  const closeZoom = () => {
+    setZoomImage(null);
+  };
+
+  const templates = [
+    { name: "Classic Elegance", src: "Classic_Elegance.jpg" },
+    { name: "Bold Statement", src: "Bold_Statement.jpg" },
+    { name: "Minimalist Focus", src: "Minamilist_focus.jpg" },
+    { name: "Creative Flair", src: "creative_flair.jpg" },
+    { name: "Tech Savvy", src: "Tech_Savvy.jpg" },
+    { name: "Modern Edge", src: "Modern_Edge.jpg" },
+  ];
+
   return (
-     <>
-          <Navbar/>
-      
-    <div className="bg-white">
-      <section className="text-center py-16">
-        <div className="intro">
+    <>
+      <div className="bg-white">
+        <section className="text-center py-16">
           <h1 className="text-4xl font-bold text-[#1062a6] mb-4">Resume Builder</h1>
-          <p className="text-xl text-gray-700 mb-8">Provide your information and generate an awesome resume!!</p>
-        </div>
-        <p id="text" className="text-lg text-gray-600 mb-8">
-          Select any template of your choice
-        </p>
-        <div className="flex justify-center gap-16 flex-wrap shadow-xl pb-10 ml-20 mr-20">
-          <div className="col flex gap-16">
-            <div className="cv_box text-center cursor-pointer" onClick={() => resGenerate('classic')}>
-              <img
-                className="cv_img h-80 w-72 object-contain shadow-xl transition-transform duration-500 hover:scale-100"
-                src="Classic_Elegance.jpg"
-                alt="Classic Elegance"
-              />
-              <p>Classic Elegance</p>
-            </div>
+          <p className="text-xl text-gray-700 mb-8">Select your favorite template to begin!</p>
 
-            <div className="cv_box text-center cursor-pointer" onClick={() => resGenerate('bold')}>
-              <img
-                className="cv_img h-80 w-72 object-contain shadow-xl transition-transform duration-500 hover:scale-100"
-                src="Bold_Statement.jpg"
-                alt="Bold Statement"
-              />
-              <p>Bold Statement</p>
-            </div>
+          <div className="flex flex-wrap justify-center gap-8 px-8">
+            {templates.map((template, index) => (
+              <div
+                key={index}
+                className="relative flex flex-col items-center w-72 h-96 shadow-lg overflow-hidden group"
+              >
+                {/* Resume Image */}
+                <img
+                  className="h-80 w-full object-contain"
+                  src={template.src}
+                  alt={template.name}
+                />
 
-            <div className="cv_box text-center cursor-pointer" onClick={() => resGenerate('minimalist')}>
-              <img
-                className="cv_img h-80 w-72 object-contain shadow-xl transition-transform duration-500 hover:scale-100"
-                src="Minamilist_focus.jpg"
-                alt="Minimalist Focus"
-              />
-              <p>Minimalist Focus</p>
-            </div>
+                {/* Template Name */}
+                <div className="absolute bottom-4 text-gray-800 font-medium text-lg">
+                  {template.name}
+                </div>
+
+                {/* Zoom Icon */}
+                <button
+                  className="absolute bottom-4 right-4 text-2xl text-gray-700 hover:scale-125 transition-transform"
+                  onClick={() => handleZoom(template.src)}
+                >
+                  🔍
+                </button>
+
+                {/* Choose Template Button */}
+                <button className="absolute inset-0 flex items-center justify-center bg-blue-600 text-white font-semibold opacity-0 group-hover:opacity-100 transition-opacity h-12 w-48 rounded">
+                  Choose Template
+                </button>
+              </div>
+            ))}
           </div>
+        </section>
+      </div>
 
-          <div className="col flex gap-16">
-            <div className="cv_box text-center cursor-pointer" onClick={() => resGenerate('creative')}>
-              <img
-                className="cv_img h-80 w-72 object-contain shadow-xl transition-transform duration-500 hover:scale-100"
-                src="creative_flair.jpg"
-                alt="Creative Flair"
-              />
-              <p>Creative Flair</p>
-            </div>
-
-            <div className="cv_box text-center cursor-pointer" onClick={() => resGenerate('savvy')}>
-              <img
-                className="cv_img h-80 w-72 object-contain shadow-xl transition-transform duration-500 hover:scale-100"
-                src="Tech_Savvy.jpg"
-                alt="Tech Savvy"
-              />
-              <p>Tech Savvy</p>
-            </div>
-
-            <div className="cv_box text-center cursor-pointer" onClick={() => resGenerate('modern')}>
-              <img
-                className="cv_img h-80 w-72 object-contain shadow-xl transition-transform duration-500 hover:scale-100"
-                src="Modern_Edge.jpg"
-                alt="Modern Edge"
-              />
-              <p>Modern Edge</p>
-            </div>
+      {/* Zoom Modal */}
+      {zoomImage && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="relative bg-white rounded-lg p-4">
+            <button
+              className="absolute top-2 right-2 text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-full p-2"
+              onClick={closeZoom}
+            >
+              ✕
+            </button>
+            <img className="max-h-screen max-w-full" src={zoomImage} alt="Zoomed Resume" />
           </div>
         </div>
-
-        <button className="button_clk bg-[#2471a3] py-3 px-8 rounded-full text-white  font-semibold hover:shadow-xl transition-all duration-500 mt-8 hover:bg-[#2e86c1]">
-          More are Coming Soon 
-        </button>
-      </section>
-    </div>
-    <Footer/>
+      )}
     </>
   );
 };
 
 export default ResumePage;
+
+
+
+
+
+

@@ -1,6 +1,8 @@
 import React from "react";
 import { useInView } from "react-intersection-observer";
+import { useNavigate } from "react-router-dom";
 const TargetResume = () => {
+  const navigate=useNavigate();
   const { ref, inView } = useInView({
     triggerOnce: true,  // Trigger only once when the element comes into view
     threshold: 0.3,     // Trigger when 30% of the element is visible
@@ -37,7 +39,7 @@ const TargetResume = () => {
         </p>
 
         {/* Button */}
-        <button className="mt-8 bg-[#2e93db] text-white px-6 py-3 rounded-md text-lg hover:bg-[#1062a6]">
+        <button className="mt-8 bg-[#2e93db] text-white px-6 py-3 rounded-md text-lg hover:bg-[#1062a6]"  onClick={() => navigate("/recruiter")}>
           Let’s Build Your Team
         </button>
       </div>

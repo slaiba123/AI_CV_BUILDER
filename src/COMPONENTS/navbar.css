@@ -51,8 +51,11 @@ body {
     transition: color 0.3s;
   }
   
-  .navbar-right .nav-links a:hover {
-    color: #2e86c1;
+  .navbar-right .button:hover {
+    color: #fff;
+  }
+   .nav-links a:hover {
+    color: #ADD8E6;
   }
   
   .navbar-right .get-started {

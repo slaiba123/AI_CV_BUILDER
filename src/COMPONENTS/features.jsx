@@ -1,6 +1,7 @@
 import React from 'react';
-
+import { useNavigate } from 'react-router-dom';
 const functionalities = () => {
+  const navigate = useNavigate();
   return (
     <div className="bg-[#3E5879] text-white py-12 px-4 ">
       <div className="text-center mb-12">
@@ -16,7 +17,7 @@ const functionalities = () => {
         ))}
       </div>
       <div className="text-center mt-12">
-        <button className="mt-9 bg-[#2471a3] text-white px-6 py-3 rounded-sm text-lg font-medium hover:bg-[#2e86c1]">
+        <button className="mt-9 bg-[#2471a3] text-white px-6 py-3 rounded-sm text-lg font-medium hover:bg-[#2e86c1]" onClick={() => navigate("/resume_input")}>
           Try ResumeCraft
         </button>
       </div>

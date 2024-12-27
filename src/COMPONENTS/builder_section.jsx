@@ -1,6 +1,7 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 const BuilderSection = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-[#1062a6] flex items-center justify-center px-8">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -12,7 +13,15 @@ const BuilderSection = () => {
           <p className="text-lg leading-relaxed font-roboto">
             Showcase your journey with a professionally designed resume and cover letter. Imagine a sleek resume that highlights your unique strengths and a cover letter that tells your story with confidence. Picture yourself taking the next step toward your career aspirations with polished, impactful documents. Our service empowers you to stand out, grab attention, and leave a lasting impression.
           </p>
-          <p className="text-lg font-serif">Way To Opportunities.</p>
+          <p className="text-2xl font-serif text-[#7fb3d5]">Way To Opportunities.</p>
+
+          <button className="mt-9 bg-[#2471a3] mr-5 text-white px-6 py-3 rounded-sm text-lg font-medium hover:bg-[#2e86c1]" onClick={() => navigate("/templates")}>
+              Craft Your Resume 🪄
+            </button>
+
+            <button className="mt-9 bg-[#2471a3] text-white px-6 py-3 rounded-sm text-lg font-medium hover:bg-[#2e86c1]" onClick={() => navigate("/coverletter")}>
+            Create Your Cover Letter ✒️
+            </button>
         </div>
 
         {/* Image Section */}

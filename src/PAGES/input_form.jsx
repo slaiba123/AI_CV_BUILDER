@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Navbar from '../COMPONENTS/navbar'
-import Footer from '../COMPONENTS/footer'
+
 
 const ResumeInput = () => {
  
@@ -99,7 +98,6 @@ const ResumeInput = () => {
 
   return (
     <>
-    <Navbar/>
     <div className="bg-[#7fb3d5] pt-20 pb-20">
     <div className="max-w-3xl mx-auto p-8 bg-white shadow-md rounded-md ">
       <form method="POST" action="resume">
@@ -490,7 +488,6 @@ const ResumeInput = () => {
       </form>
     </div>
     </div>
-    <Footer/>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
-
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 const Intro = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="relative h-[100%]">
@@ -18,12 +19,12 @@ const Intro = () => {
               grammar suggestions, and keyword optimization. Generate tailored cover letters, match your resume to job descriptions, 
               and receive personalized job recommendations—all in one place. Plus, seamlessly sync your LinkedIn profile for consistency.
             </p>
-            <p className="text-lg font-roboto text-gray-600 mt-4 overflow-hidden inline-block whitespace-nowrap animate-typewriter text-blue-800">
+            <p className="text-lg font-roboto mt-4 overflow-hidden inline-block whitespace-nowrap animate-typewriter text-blue-800">
             Get started today and turn opportunities into offers!
             </p>
 
-            <button className="mt-9 bg-[#2471a3] text-white px-6 py-3 rounded-sm text-lg font-medium hover:bg-[#2e86c1]">
-              Create My Resume
+            <button className="mt-9 bg-[#2471a3] text-white px-6 py-3 rounded-sm text-lg font-medium hover:bg-[#2e86c1]" onClick={() => navigate("/Signup")}>
+              Let's get started!
             </button>
           </div>
 

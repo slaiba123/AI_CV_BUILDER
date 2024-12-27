@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -8,10 +9,10 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <a href="#" className="logo">
+        <Link to="/" className="logo">
           <img src="logo.gif" alt="Logo" className="logo-image" />
           ResumeCraft
-        </a>
+        </Link>
       </div>
       <div className="navbar-right">
         <ul className="nav-links">
@@ -20,22 +21,22 @@ const Navbar = () => {
             onMouseEnter={() => setResumeDropdownOpen(true)}
             onMouseLeave={() => setResumeDropdownOpen(false)}
           >
-            <a href="#">Resume</a>
+            <Link to="/resume">Resume</Link>
             {isResumeDropdownOpen && (
               <ul className="dropdown-menu">
                 <li>
-                  <a href="#">
+                  <Link to="/resume_input">
                     <strong>Create Resume</strong>
                     <br />
                     Build resumes with intuitive editor
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link to="/templates">
                     <strong>Resume Samples</strong>
                     <br />
                     Get inspiration from samples
-                  </a>
+                  </Link>
                 </li>
               </ul>
             )}
@@ -45,33 +46,33 @@ const Navbar = () => {
             onMouseEnter={() => setCoverLetterDropdownOpen(true)}
             onMouseLeave={() => setCoverLetterDropdownOpen(false)}
           >
-            <a href="#">Cover Letter</a>
+            <Link to="/coverletter">Cover Letter</Link>
             {isCoverLetterDropdownOpen && (
               <ul className="dropdown-menu">
                 <li>
-                  <a href="#">
+                  <Link to="#">
                     <strong>Cover Letter Builder</strong>
                     <br />
                     Build cover letters with intuitive editor
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link to="#">
                     <strong>Cover Letter Samples</strong>
                     <br />
                     Gain inspiration from samples
-                  </a>
+                  </Link>
                 </li>
               </ul>
             )}
           </li>
           <li>
-            <a href="#">Sign in</a>
+            <Link to="/signin">Sign in</Link>
           </li>
           <li>
-            <div className="get-started">
+          <Link className="get-started" to="/Signup">
               Get Started
-            </div>
+            </Link>
           </li>
         </ul>
       </div>

@@ -40,9 +40,9 @@ const FAQ = () => {
       <h1 className="text-3xl font-bold text-center mb-6">
         Your frequently asked questions.
       </h1>
-      <p className="text-center text-gray-600 mb-8">
+      <p className="text-center text-gray-600 mb-8 text-lg">
         If you don't find answers to your questions here, don't hesitate to ask.
-        Kick’s customer service team is always ready to help.
+        Our customer service team is always ready to help.
       </p>
       {faqs.map((faq, index) => (
         <div

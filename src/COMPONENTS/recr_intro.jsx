@@ -2,7 +2,7 @@ import React from "react";
 
 const Rec_intro = () => {
   return (
-    <div className="bg-[#3E5879] text-white py-12 px-6">
+    <div className=" bg-[#1062a6] text-white py-12 px-6">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-x-20">
         {/* Left Section */}
         <div className="mb-8 lg:mb-0 lg:max-w-md mr-20">
@@ -10,13 +10,13 @@ const Rec_intro = () => {
           <p className="text-lg mb-6 text-justify">
             Our platform revolutionizes the hiring process by offering cutting-edge tools to make finding the perfect candidate faster and more efficient. With intelligent CV scoring, visual feedback on skills, actionable improvement recommendations, and AI-powered search and filter options, we empower recruiters to focus on what truly matters—connecting with the right talent. Compare candidates effortlessly, uncover key insights at a glance, and ensure every hiring decision is backed by data-driven precision. Ready to transform the way you recruit?
           </p>
-          <a
-            href="#features"
+          {/* <a
+            href="/findcandidate"
             className="text-white font-semibold hover:underline flex items-center"
           >
             Let's start Recruiting
             <span className="ml-2">→</span>
-          </a>
+          </a> */}
         </div>
         {/* Right Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
