@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate,useLocation } from "react-router-dom";
 
-const ResumeInput = () => {
+const MinimalistInput = () => {
   const navigate = useNavigate();
   const location = useLocation(); // Access location
   const { template } = location.state || {};
@@ -67,7 +67,7 @@ const ResumeInput = () => {
   };
 
   const handleGenerateResume = () => {
-    navigate(`/${template}`, {
+    navigate("/Minimalist_focus", {
       state: {
         resumeData: {
           ...personalDetails,
@@ -284,118 +284,6 @@ const ResumeInput = () => {
           </button>
         </div>
 
-        {/* Languages Section */}
-        <div>
-          <h3 className="text-xl font-semibold">Languages</h3>
-          {languagesFields.map((field) => (
-            <div key={field.id} className="space-y-2 mb-2">
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Language"
-                value={field.language}
-                onChange={(e) => {
-                  const updatedFields = languagesFields.map((f) =>
-                    f.id === field.id ? { ...f, language: e.target.value } : f
-                  );
-                  setLanguagesFields(updatedFields);
-                }}
-              />
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Proficiency"
-                value={field.proficiency}
-                onChange={(e) => {
-                  const updatedFields = languagesFields.map((f) =>
-                    f.id === field.id ? { ...f, proficiency: e.target.value } : f
-                  );
-                  setLanguagesFields(updatedFields);
-                }}
-              />
-              <button type="button" onClick={() => deleteField(languagesFields, setLanguagesFields, field.id)}>
-                Delete
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={addLanguage} className="bg-blue-500 text-white p-2 rounded">
-            Add Language
-          </button>
-        </div>
-
-        {/* Internships Section */}
-        <div>
-          <h3 className="text-xl font-semibold">Internships</h3>
-          {internshipsFields.map((field) => (
-            <div key={field.id} className="space-y-2 mb-2">
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Company"
-                value={field.company}
-                onChange={(e) => {
-                  const updatedFields = internshipsFields.map((f) =>
-                    f.id === field.id ? { ...f, company: e.target.value } : f
-                  );
-                  setInternshipsFields(updatedFields);
-                }}
-              />
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Role"
-                value={field.role}
-                onChange={(e) => {
-                  const updatedFields = internshipsFields.map((f) =>
-                    f.id === field.id ? { ...f, role: e.target.value } : f
-                  );
-                  setInternshipsFields(updatedFields);
-                }}
-              />
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Start Date"
-                value={field.startDate}
-                onChange={(e) => {
-                  const updatedFields = internshipsFields.map((f) =>
-                    f.id === field.id ? { ...f, startDate: e.target.value } : f
-                  );
-                  setInternshipsFields(updatedFields);
-                }}
-              />
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="End Date"
-                value={field.endDate}
-                onChange={(e) => {
-                  const updatedFields = internshipsFields.map((f) =>
-                    f.id === field.id ? { ...f, endDate: e.target.value } : f
-                  );
-                  setInternshipsFields(updatedFields);
-                }}
-              />
-              <textarea
-                className="w-full p-2 border border-gray-300 rounded"
-                placeholder="Description"
-                value={field.description}
-                onChange={(e) => {
-                  const updatedFields = internshipsFields.map((f) =>
-                    f.id === field.id ? { ...f, description: e.target.value } : f
-                  );
-                  setInternshipsFields(updatedFields);
-                }}
-              />
-              <button type="button" onClick={() => deleteField(internshipsFields, setInternshipsFields, field.id)}>
-                Delete
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={addInternship} className="bg-blue-500 text-white p-2 rounded">
-            Add Internship
-          </button>
-        </div>
         <div>
       <h3 className="text-xl font-semibold">Experience</h3>
       {experienceFields.map((field) => (
@@ -537,4 +425,4 @@ const ResumeInput = () => {
   );
 };
 
-export default ResumeInput;
+export default MinimalistInput;

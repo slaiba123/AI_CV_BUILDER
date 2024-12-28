@@ -16,8 +16,15 @@ import Rec_input from './PAGES/rec_input'
 import Jobsearch from './COMPONENTS/relevant_job'
 import CL_templates from './PAGES/template_CL'
 import Navbar_Rec from './COMPONENTS/navbar_rec'
-
-
+// import TemplateSelector from './COMPONENTS/template_selector'
+import Minamilist_focus from './COMPONENTS/Minimalist_focus'
+import ModernInput from './COMPONENTS/Modern_input'
+import Modern from './COMPONENTS/modern_edge'
+import CreativeInput from './COMPONENTS/Creative_input'
+import Creative from './COMPONENTS/creative_flair'
+import TechInput from './COMPONENTS/Tech_input'
+import Tech from './COMPONENTS/Tech_Savvy'
+import MinimalistInput from './COMPONENTS/Minimalist_input'
 function App() {
   const route= createBrowserRouter([
     { path: "/",
@@ -32,6 +39,9 @@ function App() {
     { path: "/templates",
       element:  <><Navbar/><TemplateSelect/><Footer/> </>
      },
+    // { path: "/templates",
+    //   element:  <><Navbar/><TemplateSelector/><Footer/> </>
+    //  },
     { path: "/coverletter_templates",
       element:  <><Navbar/><CL_templates/><Footer/> </>
      },
@@ -60,6 +70,33 @@ function App() {
     { path: "/job-posting",
       element: <><Navbar_Rec/> <JobPostingForm /><Footer/> </> 
     },
+    { path: "/Minimalist_input",
+      element: <><Navbar_Rec/> <MinimalistInput/><Footer/> </> 
+    },
+    { path: "/Minimalist_focus",
+    element: <>  <Minamilist_focus/> </> 
+    },
+    { path: "/Modern_input",
+      element: <> <Navbar/> <ModernInput/> <Footer/> </> 
+    },
+    { path: "/modern_edge",
+      element: <> <Modern/>  </> 
+    },
+    { path: "/Creative_input",
+      element: <> <Navbar/> <CreativeInput/> <Footer/> </> 
+    },
+    { path: "/creative_flair",
+      element: <>  <Creative/>  </> 
+    },
+    { path: "/Tech_input",
+      element: <> <Navbar/> <TechInput/> <Footer/> </> 
+    },
+    { path: "/tech-savvy",
+      element: <>  <Tech/> </> 
+    },
+   
+
+
   
 
   ])

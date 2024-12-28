@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate,useLocation } from "react-router-dom";
 
-const ResumeInput = () => {
+const ModernInput = () => {
   const navigate = useNavigate();
   const location = useLocation(); // Access location
   const { template } = location.state || {};
@@ -16,13 +16,14 @@ const ResumeInput = () => {
     phone: '',
     country: '',
     city: '',
+    linkedin:'',
     summary: '',
   });
 
   // State for other sections
   const [educationFields, setEducationFields] = useState([]);
-  const [skillsFields, setSkillsFields] = useState([]);
-  const [coursesFields, setCoursesFields] = useState([]);
+//   const [skillsFields, setSkillsFields] = useState([]);
+  const [expertiesFields, setExpertiesFields] = useState([]);
   const [languagesFields, setLanguagesFields] = useState([]);
   const [internshipsFields, setInternshipsFields] = useState([]);
   const [CertificationsFields, setCertificationsFields] = useState([]);
@@ -34,28 +35,31 @@ const ResumeInput = () => {
     setEducationFields([...educationFields, { id: Date.now(), degree: '', institution: '', year: '' }]);
   };
 
-  const addSkill = () => {
-    setSkillsFields([...skillsFields, { id: Date.now(), skill: '' }]);
+//   const addSkill = () => {
+//     setSkillsFields([...skillsFields, { id: Date.now(), skill: '' }]);
+//   };
+  const addExperties = () => {
+    setExpertiesFields([...expertiesFields, { id: Date.now(), skill: '' }]);
   };
 
   const addCertifications = () => {
     setCertificationsFields([...CertificationsFields, { id: Date.now(), course: '', institution: '', year: '' }]);
   };
 
-  const addLanguage = () => {
-    setLanguagesFields([...languagesFields, { id: Date.now(), language: '', proficiency: '' }]);
-  };
+//   const addLanguage = () => {
+//     setLanguagesFields([...languagesFields, { id: Date.now(), language: '', proficiency: '' }]);
+//   };
 
-  const addInternship = () => {
-    setInternshipsFields([...internshipsFields, { id: Date.now(), company: '', role: '', startDate: '', endDate: '', description: '' }]);
-  };
+//   const addInternship = () => {
+//     setInternshipsFields([...internshipsFields, { id: Date.now(), company: '', role: '', startDate: '', endDate: '', description: '' }]);
+//   };
   const addexperience = () => {
     setexperienceFields([...experienceFields, { id: Date.now(), company: '', role: '', startDate: '', endDate: '', description: '' }]);
   };
 
-  const addProject = () => {
-    setProjectsFields([...projectsFields, { id: Date.now(), projectName: '', projectYear: '', projectDesc: '' }]);
-  };
+//   const addProject = () => {
+//     setProjectsFields([...projectsFields, { id: Date.now(), projectName: '', projectYear: '', projectDesc: '' }]);
+//   };
 
   const deleteField = (fields, setFields, id) => {
     setFields(fields.filter((field) => field.id !== id));
@@ -67,20 +71,19 @@ const ResumeInput = () => {
   };
 
   const handleGenerateResume = () => {
-    navigate(`/${template}`, {
+    console.log('Generate Resume clicked');
+    navigate(`/modern_edge`, {
       state: {
         resumeData: {
           ...personalDetails,
           education: educationFields,
-          skills: skillsFields,
           certifications:CertificationsFields,
-          languages: languagesFields,
-          internships: internshipsFields,
           projects: projectsFields,
           experience:experienceFields
         },
       },
     });
+    console.log(state);
   };
 
   return (
@@ -132,6 +135,13 @@ const ResumeInput = () => {
             placeholder="Phone"
             value={personalDetails.phone}
             onChange={(e) => setPersonalDetails({ ...personalDetails, phone: e.target.value })}
+          />
+          <input
+            className="w-full p-2 border border-gray-300 rounded mb-2"
+            type="text"
+            placeholder="Linkedin URL"
+            value={personalDetails.linkedin}
+            onChange={(e) => setPersonalDetails({ ...personalDetails, linkedin: e.target.value })}
           />
           <input
             className="w-full p-2 border border-gray-300 rounded mb-2"
@@ -206,30 +216,30 @@ const ResumeInput = () => {
           </button>
         </div>
 
-        {/* Skills Section */}
+        {/* Experties Section */}
         <div>
-          <h3 className="text-xl font-semibold">Skills</h3>
-          {skillsFields.map((field) => (
+          <h3 className="text-xl font-semibold">Area of Experties</h3>
+          {expertiesFields.map((field) => (
             <div key={field.id} className="space-y-2 mb-2">
               <input
                 className="w-full p-2 border border-gray-300 rounded"
                 type="text"
-                placeholder="Skill"
-                value={field.skill}
+                placeholder="Experties"
+                value={field.experties}
                 onChange={(e) => {
                   const updatedFields = skillsFields.map((f) =>
-                    f.id === field.id ? { ...f, skill: e.target.value } : f
+                    f.id === field.id ? { ...f, experties: e.target.value } : f
                   );
-                  setSkillsFields(updatedFields);
+                  setExppertiesFields(updatedFields);
                 }}
               />
-              <button type="button" onClick={() => deleteField(skillsFields, setSkillsFields, field.id)}>
+              <button type="button" onClick={() => deleteField(expertiesFields, setExpertiesFields, field.id)}>
                 Delete
               </button>
             </div>
           ))}
-          <button type="button" onClick={addSkill} className="bg-blue-500 text-white p-2 rounded">
-            Add Skill
+          <button type="button" onClick={addExperties} className="bg-blue-500 text-white p-2 rounded">
+            Add Experties
           </button>
         </div>
 
@@ -283,121 +293,9 @@ const ResumeInput = () => {
             Add Certification
           </button>
         </div>
-
-        {/* Languages Section */}
+        {/* Experience Section */}
         <div>
-          <h3 className="text-xl font-semibold">Languages</h3>
-          {languagesFields.map((field) => (
-            <div key={field.id} className="space-y-2 mb-2">
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Language"
-                value={field.language}
-                onChange={(e) => {
-                  const updatedFields = languagesFields.map((f) =>
-                    f.id === field.id ? { ...f, language: e.target.value } : f
-                  );
-                  setLanguagesFields(updatedFields);
-                }}
-              />
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Proficiency"
-                value={field.proficiency}
-                onChange={(e) => {
-                  const updatedFields = languagesFields.map((f) =>
-                    f.id === field.id ? { ...f, proficiency: e.target.value } : f
-                  );
-                  setLanguagesFields(updatedFields);
-                }}
-              />
-              <button type="button" onClick={() => deleteField(languagesFields, setLanguagesFields, field.id)}>
-                Delete
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={addLanguage} className="bg-blue-500 text-white p-2 rounded">
-            Add Language
-          </button>
-        </div>
-
-        {/* Internships Section */}
-        <div>
-          <h3 className="text-xl font-semibold">Internships</h3>
-          {internshipsFields.map((field) => (
-            <div key={field.id} className="space-y-2 mb-2">
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Company"
-                value={field.company}
-                onChange={(e) => {
-                  const updatedFields = internshipsFields.map((f) =>
-                    f.id === field.id ? { ...f, company: e.target.value } : f
-                  );
-                  setInternshipsFields(updatedFields);
-                }}
-              />
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Role"
-                value={field.role}
-                onChange={(e) => {
-                  const updatedFields = internshipsFields.map((f) =>
-                    f.id === field.id ? { ...f, role: e.target.value } : f
-                  );
-                  setInternshipsFields(updatedFields);
-                }}
-              />
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Start Date"
-                value={field.startDate}
-                onChange={(e) => {
-                  const updatedFields = internshipsFields.map((f) =>
-                    f.id === field.id ? { ...f, startDate: e.target.value } : f
-                  );
-                  setInternshipsFields(updatedFields);
-                }}
-              />
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="End Date"
-                value={field.endDate}
-                onChange={(e) => {
-                  const updatedFields = internshipsFields.map((f) =>
-                    f.id === field.id ? { ...f, endDate: e.target.value } : f
-                  );
-                  setInternshipsFields(updatedFields);
-                }}
-              />
-              <textarea
-                className="w-full p-2 border border-gray-300 rounded"
-                placeholder="Description"
-                value={field.description}
-                onChange={(e) => {
-                  const updatedFields = internshipsFields.map((f) =>
-                    f.id === field.id ? { ...f, description: e.target.value } : f
-                  );
-                  setInternshipsFields(updatedFields);
-                }}
-              />
-              <button type="button" onClick={() => deleteField(internshipsFields, setInternshipsFields, field.id)}>
-                Delete
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={addInternship} className="bg-blue-500 text-white p-2 rounded">
-            Add Internship
-          </button>
-        </div>
-        <div>
-      <h3 className="text-xl font-semibold">Experience</h3>
+      <h3 className="text-xl font-semibold">Work Experience</h3>
       {experienceFields.map((field) => (
         <div key={field.id} className="space-y-2 mb-2">
           <input
@@ -476,55 +374,7 @@ const ResumeInput = () => {
         Add Experience
       </button>
     </div>
-        {/* Projects Section */}
-        <div>
-          <h3 className="text-xl font-semibold">Projects</h3>
-          {projectsFields.map((field) => (
-            <div key={field.id} className="space-y-2 mb-2">
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Project Name"
-                value={field.projectName}
-                onChange={(e) => {
-                  const updatedFields = projectsFields.map((f) =>
-                    f.id === field.id ? { ...f, projectName: e.target.value } : f
-                  );
-                  setProjectsFields(updatedFields);
-                }}
-              />
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Year"
-                value={field.projectYear}
-                onChange={(e) => {
-                  const updatedFields = projectsFields.map((f) =>
-                    f.id === field.id ? { ...f, projectYear: e.target.value } : f
-                  );
-                  setProjectsFields(updatedFields);
-                }}
-              />
-              <textarea
-                className="w-full p-2 border border-gray-300 rounded"
-                placeholder="Project Description"
-                value={field.projectDesc}
-                onChange={(e) => {
-                  const updatedFields = projectsFields.map((f) =>
-                    f.id === field.id ? { ...f, projectDesc: e.target.value } : f
-                  );
-                  setProjectsFields(updatedFields);
-                }}
-              />
-              <button type="button" onClick={() => deleteField(projectsFields, setProjectsFields, field.id)}>
-                Delete
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={addProject} className="bg-blue-500 text-white p-2 rounded">
-            Add Project
-          </button>
-        </div>
+      
 
         {/* Final Submit Button */}
         <div className="text-center">
@@ -537,4 +387,4 @@ const ResumeInput = () => {
   );
 };
 
-export default ResumeInput;
+export default ModernInput;

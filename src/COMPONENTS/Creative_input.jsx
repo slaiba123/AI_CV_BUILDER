@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate,useLocation } from "react-router-dom";
 
-const ResumeInput = () => {
+const CreativeInput = () => {
   const navigate = useNavigate();
   const location = useLocation(); // Access location
   const { template } = location.state || {};
@@ -13,6 +13,7 @@ const ResumeInput = () => {
     firstName: '',
     lastName: '',
     email: '',
+    instagram:'',
     phone: '',
     country: '',
     city: '',
@@ -22,10 +23,11 @@ const ResumeInput = () => {
   // State for other sections
   const [educationFields, setEducationFields] = useState([]);
   const [skillsFields, setSkillsFields] = useState([]);
-  const [coursesFields, setCoursesFields] = useState([]);
-  const [languagesFields, setLanguagesFields] = useState([]);
-  const [internshipsFields, setInternshipsFields] = useState([]);
-  const [CertificationsFields, setCertificationsFields] = useState([]);
+  const [expertiesFields, setExpertiesFields] = useState([]);
+//   const [coursesFields, setCoursesFields] = useState([]);
+//   const [languagesFields, setLanguagesFields] = useState([]);
+//   const [internshipsFields, setInternshipsFields] = useState([]);
+//   const [CertificationsFields, setCertificationsFields] = useState([]);
   const [projectsFields, setProjectsFields] = useState([]);
   const [experienceFields, setexperienceFields] = useState([]);
 
@@ -37,18 +39,22 @@ const ResumeInput = () => {
   const addSkill = () => {
     setSkillsFields([...skillsFields, { id: Date.now(), skill: '' }]);
   };
-
-  const addCertifications = () => {
-    setCertificationsFields([...CertificationsFields, { id: Date.now(), course: '', institution: '', year: '' }]);
+  const addExperties = () => {
+    setExpertiesFields([...expertiesFields, { id: Date.now(), skill: '' }]);
   };
 
-  const addLanguage = () => {
-    setLanguagesFields([...languagesFields, { id: Date.now(), language: '', proficiency: '' }]);
-  };
 
-  const addInternship = () => {
-    setInternshipsFields([...internshipsFields, { id: Date.now(), company: '', role: '', startDate: '', endDate: '', description: '' }]);
-  };
+//   const addCertifications = () => {
+//     setCertificationsFields([...CertificationsFields, { id: Date.now(), course: '', institution: '', year: '' }]);
+//   };
+
+//   const addLanguage = () => {
+//     setLanguagesFields([...languagesFields, { id: Date.now(), language: '', proficiency: '' }]);
+//   };
+
+//   const addInternship = () => {
+//     setInternshipsFields([...internshipsFields, { id: Date.now(), company: '', role: '', startDate: '', endDate: '', description: '' }]);
+//   };
   const addexperience = () => {
     setexperienceFields([...experienceFields, { id: Date.now(), company: '', role: '', startDate: '', endDate: '', description: '' }]);
   };
@@ -67,15 +73,12 @@ const ResumeInput = () => {
   };
 
   const handleGenerateResume = () => {
-    navigate(`/${template}`, {
+    navigate(`/creative_flair`, {
       state: {
         resumeData: {
           ...personalDetails,
           education: educationFields,
           skills: skillsFields,
-          certifications:CertificationsFields,
-          languages: languagesFields,
-          internships: internshipsFields,
           projects: projectsFields,
           experience:experienceFields
         },
@@ -132,6 +135,13 @@ const ResumeInput = () => {
             placeholder="Phone"
             value={personalDetails.phone}
             onChange={(e) => setPersonalDetails({ ...personalDetails, phone: e.target.value })}
+          />
+          <input
+            className="w-full p-2 border border-gray-300 rounded mb-2"
+            type="text"
+            placeholder="Instagram Link"
+            value={personalDetails.instagram}
+            onChange={(e) => setPersonalDetails({ ...personalDetails, instagram: e.target.value })}
           />
           <input
             className="w-full p-2 border border-gray-300 rounded mb-2"
@@ -233,7 +243,35 @@ const ResumeInput = () => {
           </button>
         </div>
 
-        {/* Courses Section */}
+        {/* Experties Section */}
+        <div>
+          <h3 className="text-xl font-semibold">Area of Experties</h3>
+          {expertiesFields.map((field) => (
+            <div key={field.id} className="space-y-2 mb-2">
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Experties"
+                value={field.experties}
+                onChange={(e) => {
+                  const updatedFields = skillsFields.map((f) =>
+                    f.id === field.id ? { ...f, experties: e.target.value } : f
+                  );
+                  setExppertiesFields(updatedFields);
+                }}
+              />
+              <button type="button" onClick={() => deleteField(expertiesFields, setExpertiesFields, field.id)}>
+                Delete
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addExperties} className="bg-blue-500 text-white p-2 rounded">
+            Add Experties
+          </button>
+        </div>
+
+
+        {/* Courses Section
         <div>
           <h3 className="text-xl font-semibold">Certifications</h3>
           {CertificationsFields.map((field) => (
@@ -282,9 +320,9 @@ const ResumeInput = () => {
           <button type="button" onClick={addCertifications} className="bg-blue-500 text-white p-2 rounded">
             Add Certification
           </button>
-        </div>
+        </div> */}
 
-        {/* Languages Section */}
+        {/* Languages Section
         <div>
           <h3 className="text-xl font-semibold">Languages</h3>
           {languagesFields.map((field) => (
@@ -321,9 +359,9 @@ const ResumeInput = () => {
           <button type="button" onClick={addLanguage} className="bg-blue-500 text-white p-2 rounded">
             Add Language
           </button>
-        </div>
+        </div> */}
 
-        {/* Internships Section */}
+        {/* Internships Section
         <div>
           <h3 className="text-xl font-semibold">Internships</h3>
           {internshipsFields.map((field) => (
@@ -395,7 +433,7 @@ const ResumeInput = () => {
           <button type="button" onClick={addInternship} className="bg-blue-500 text-white p-2 rounded">
             Add Internship
           </button>
-        </div>
+        </div> */}
         <div>
       <h3 className="text-xl font-semibold">Experience</h3>
       {experienceFields.map((field) => (
@@ -537,4 +575,4 @@ const ResumeInput = () => {
   );
 };
 
-export default ResumeInput;
+export default CreativeInput;
