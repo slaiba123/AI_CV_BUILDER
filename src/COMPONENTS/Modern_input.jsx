@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate,useLocation } from "react-router-dom";
-
+import { doc, setDoc, collection, getDocs, addDoc , getFirestore} from 'firebase/firestore';
+import { db } from '../firebase';
 const ModernInput = () => {
   const navigate = useNavigate();
   const location = useLocation(); // Access location
@@ -22,7 +23,7 @@ const ModernInput = () => {
 
   // State for other sections
   const [educationFields, setEducationFields] = useState([]);
-//   const [skillsFields, setSkillsFields] = useState([]);
+  // const [skillsFields, setSkillsFields] = useState([]);
   const [expertiesFields, setExpertiesFields] = useState([]);
   const [languagesFields, setLanguagesFields] = useState([]);
   const [internshipsFields, setInternshipsFields] = useState([]);
@@ -41,6 +42,7 @@ const ModernInput = () => {
   const addExperties = () => {
     setExpertiesFields([...expertiesFields, { id: Date.now(), skill: '' }]);
   };
+  
 
   const addCertifications = () => {
     setCertificationsFields([...CertificationsFields, { id: Date.now(), course: '', institution: '', year: '' }]);
@@ -67,25 +69,63 @@ const ModernInput = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ personalDetails, educationFields, skillsFields, coursesFields, languagesFields, internshipsFields, projectsFields });
+    console.log({ personalDetails, educationFields, expertiesFields, CertificationsFields, experienceFields, projectsFields });
   };
 
+  // const handleGenerateResume = () => {
+  //   console.log('Generate Resume clicked');
+  //   navigate(`/modern_edge`, {
+  //     state: {
+  //       resumeData: {
+  //         ...personalDetails,
+  //         education: educationFields,
+  //         certifications:CertificationsFields,
+  //         // projects: projectsFields,
+  //         experience:experienceFields,
+  //         experties:expertiesFields
+  //       },
+  //     },
+  //   });
+  //   console.log(state);
+  // };
   const handleGenerateResume = () => {
-    console.log('Generate Resume clicked');
-    navigate(`/modern_edge`, {
+    // Prepare the resume data
+    
+    const resumeData = {
+          education: educationFields,
+          certifications:CertificationsFields,
+          // projects: projectsFields,
+          experience:experienceFields,
+          experties:expertiesFields
+    };
+  
+    // Get Firestore instance
+  
+  
+    // Add data to Firestore
+    addDoc(collection(db, "resumes"), resumeData)
+      .then(() => {
+        console.log("Resume data saved!");
+      })
+      .catch((error) => {
+        console.error("Error saving data: ", error);
+      });
+  
+    // Navigate to the 'tech-savvy' page, passing the resume data in state
+    
+    navigate("/modern_edge", {
       state: {
         resumeData: {
           ...personalDetails,
           education: educationFields,
           certifications:CertificationsFields,
-          projects: projectsFields,
-          experience:experienceFields
+          // projects: projectsFields,
+          experience:experienceFields,
+          experties:expertiesFields
         },
       },
     });
-    console.log(state);
   };
-
   return (
     <div className="max-w-4xl mx-auto p-6 bg-gray-100 rounded shadow">
       <h2 className="text-2xl font-bold mb-4">Resume Input Form</h2>
@@ -227,10 +267,10 @@ const ModernInput = () => {
                 placeholder="Experties"
                 value={field.experties}
                 onChange={(e) => {
-                  const updatedFields = skillsFields.map((f) =>
+                  const updatedFields = expertiesFields.map((f) =>
                     f.id === field.id ? { ...f, experties: e.target.value } : f
                   );
-                  setExppertiesFields(updatedFields);
+                  setExpertiesFields(updatedFields);
                 }}
               />
               <button type="button" onClick={() => deleteField(expertiesFields, setExpertiesFields, field.id)}>
@@ -346,6 +386,18 @@ const ModernInput = () => {
               setexperienceFields(updatedFields);
             }}
           />
+           <input
+            className="w-full p-2 border border-gray-300 rounded"
+            type="text"
+            placeholder="Location"
+            value={field.Location}
+            onChange={(e) => {
+              const updatedFields = experienceFields.map((f) =>
+                f.id === field.id ? { ...f, Location: e.target.value } : f
+              );
+              setexperienceFields(updatedFields);
+            }}
+          />
           <textarea
             className="w-full p-2 border border-gray-300 rounded"
             placeholder="Description"
@@ -357,6 +409,7 @@ const ModernInput = () => {
               setexperienceFields(updatedFields);
             }}
           />
+         
           <button
             type="button"
             onClick={() => deleteField(experienceFields, setExperienceFields, field.id)}

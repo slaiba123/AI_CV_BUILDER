@@ -229,6 +229,7 @@
 import React, { useRef } from "react";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import html2pdf from "html2pdf.js";
 import { useLocation } from "react-router-dom";
 const Tech = () => {
   const resumeRef = useRef(null);
@@ -246,6 +247,7 @@ const Tech = () => {
       width: element.scrollWidth,
       height: element.scrollHeight,
       useCORS: true,
+      scale:2,
     });
 
     const imgData = canvas.toDataURL("image/png");
@@ -257,7 +259,8 @@ const Tech = () => {
     pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
     pdf.save("resume.pdf");
   };
-
+  
+  
   return (
     <div className="p-10 bg-gray-100 min-h-screen">
       <div
@@ -302,13 +305,23 @@ const Tech = () => {
                   <h3 className="font-semibold">{skill.category}</h3>
                   <ul className="mt-2 space-y-4">
                       <li key={skill.id}>
-                        <p>{skill.skill}</p>
+                        <p className="mb-4">{skill.skill}</p>
                         <div className="w-full bg-gray-200 h-2 rounded skill-bar">
-                          <div
-                            className="bg-blue-600 h-2 rounded"
-                            style={{ width: `${skill.level}%` }}
-                          ></div>
-                        </div>
+                        <div
+                          className="bg-blue-600 h-2 rounded"
+                          style={{
+                            width:
+                              skill.level === "Beginner"
+                                ? "25%"
+                                : skill.level === "Intermediate"
+                                ? "50%"
+                                : skill.level === "Advanced"
+                                ? "100%"
+                                : "0%", // fallback in case skill.level is undefined
+                          }}
+                        ></div>
+                      </div>
+
                       </li>
                   </ul>
                 </div>

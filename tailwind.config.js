@@ -40,6 +40,12 @@ export default {
           },
         },
       },
+      listStyleType: {
+        disc: 'disc',
+      },
+      spacing: {
+        5: '1.25rem', // Matches pl-5 and ml-5
+      },
     },
   },
   plugins: [],

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate,useLocation } from "react-router-dom";
-
+import { doc, setDoc, collection, getDocs, addDoc , getFirestore} from 'firebase/firestore';
+import { db } from '../firebase';
 const TechInput = () => {
   const navigate = useNavigate();
   const location = useLocation(); // Access location
@@ -88,24 +89,82 @@ const TechInput = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({ personalDetails, educationFields, skillsFields, coursesFields, languagesFields, internshipsFields, projectsFields });
-  };
+   
+};
+  
 
+  // const handleGenerateResume = () => {
+  //   const resumeData = {
+  //     personalDetails,
+  //     education: educationFields,
+  //     skills: skillsFields,
+  //     certifications: CertificationsFields,
+  //     // languages: languagesFields, // You can add this if needed
+  //     projects: projectsFields,
+  //     experience: experienceFields
+  //   };
+  //   db.collection("resumes").add(resumeData)
+  //   .then(() => {
+  //     console.log("Resume data saved!");
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error saving data: ", error);
+  //   });
+  //   navigate("/tech-savvy", {
+  //     state: {
+  //       resumeData: {
+  //         ...personalDetails,
+  //         education: educationFields,
+  //         skills: skillsFields,
+  //         certifications:CertificationsFields,
+  //         // languages: languagesFields,
+  //         projects: projectsFields,
+  //         experience:experienceFields
+  //       },
+  //     },
+  //   });
+  // };
+  
+  
+  // Initialize Firestore (assuming you've already initialized Firebase with initializeApp)
+  
   const handleGenerateResume = () => {
+    // Prepare the resume data
+    const resumeData = {
+      education: educationFields,
+      skills: skillsFields,
+      certifications: CertificationsFields,
+      projects: projectsFields,
+      experience: experienceFields
+    };
+  
+    // Get Firestore instance
+  
+  
+    // Add data to Firestore
+    addDoc(collection(db, "resumes"), resumeData)
+      .then(() => {
+        console.log("Resume data saved!");
+      })
+      .catch((error) => {
+        console.error("Error saving data: ", error);
+      });
+  
+
     navigate("/tech-savvy", {
       state: {
         resumeData: {
           ...personalDetails,
           education: educationFields,
           skills: skillsFields,
-          certifications:CertificationsFields,
-          // languages: languagesFields,
+          certifications: CertificationsFields,
           projects: projectsFields,
-          experience:experienceFields
+          experience: experienceFields
         },
       },
     });
   };
-
+  
   return (
     <div className="max-w-4xl mx-auto p-6 bg-gray-100 rounded shadow">
       <h2 className="text-2xl font-bold mb-4">Resume Input Form</h2>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate,useLocation } from "react-router-dom";
 import { doc, setDoc, collection, getDocs, addDoc , getFirestore} from 'firebase/firestore';
 import { db } from '../firebase';
-const CreativeInput = () => {
+const BoldInput = () => {
   const navigate = useNavigate();
   const location = useLocation(); // Access location
   const { template } = location.state || {};
@@ -14,23 +14,21 @@ const CreativeInput = () => {
     firstName: '',
     lastName: '',
     email: '',
-    instagram:'',
     phone: '',
-    country: '',
-    city: '',
     summary: '',
   });
 
   // State for other sections
   const [educationFields, setEducationFields] = useState([]);
   const [skillsFields, setSkillsFields] = useState([]);
-  const [expertiesFields, setExpertiesFields] = useState([]);
 //   const [coursesFields, setCoursesFields] = useState([]);
 //   const [languagesFields, setLanguagesFields] = useState([]);
 //   const [internshipsFields, setInternshipsFields] = useState([]);
 //   const [CertificationsFields, setCertificationsFields] = useState([]);
-  const [projectsFields, setProjectsFields] = useState([]);
+//   const [projectsFields, setProjectsFields] = useState([]);
   const [experienceFields, setexperienceFields] = useState([]);
+  const [references, setReferences] = useState([]);
+
 
   // Add methods for each section
   const addEducation = () => {
@@ -38,12 +36,8 @@ const CreativeInput = () => {
   };
 
   const addSkill = () => {
-    setSkillsFields([...skillsFields, { id: Date.now(), skill: '' }]);
+    setSkillsFields([...skillsFields, { id: Date.now(), skill: '',level:'' }]);
   };
-  const addExperties = () => {
-    setExpertiesFields([...expertiesFields, { id: Date.now(), experties: '' }]);
-  };
-
 
 //   const addCertifications = () => {
 //     setCertificationsFields([...CertificationsFields, { id: Date.now(), course: '', institution: '', year: '' }]);
@@ -60,13 +54,30 @@ const CreativeInput = () => {
     setexperienceFields([...experienceFields, { id: Date.now(), company: '', role: '', startDate: '', endDate: '', description: '' }]);
   };
 
-  const addProject = () => {
-    setProjectsFields([...projectsFields, { id: Date.now(), projectName: '', projectYear: '', projectDesc: '' }]);
-  };
+//   const addProject = () => {
+//     setProjectsFields([...projectsFields, { id: Date.now(), projectName: '', projectYear: '', projectDesc: '' }]);
+//   };
 
   const deleteField = (fields, setFields, id) => {
     setFields(fields.filter((field) => field.id !== id));
   };
+
+
+    const addReference = () => {
+      setReferences([...references, { id: Date.now(), name: "", contact: "" }]);
+    };
+  
+    const updateReference = (id, field, value) => {
+      const updatedReferences = references.map((ref) =>
+        ref.id === id ? { ...ref, [field]: value } : ref
+      );
+      setReferences(updatedReferences);
+    };
+  
+    const deleteReference = (id) => {
+      const filteredReferences = references.filter((ref) => ref.id !== id);
+      setReferences(filteredReferences);
+    };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -74,28 +85,34 @@ const CreativeInput = () => {
   };
 
   // const handleGenerateResume = () => {
-  //   navigate(`/creative_flair`, {
+  //   navigate(`/bold_statement`, {
   //     state: {
   //       resumeData: {
   //         ...personalDetails,
   //         education: educationFields,
   //         skills: skillsFields,
-  //         projects: projectsFields,
+  //       //   certifications:CertificationsFields,
+  //       //   languages: languagesFields,
+  //       //   internships: internshipsFields,
+  //       //   projects: projectsFields,
   //         experience:experienceFields,
-  //         experties:expertiesFields,
+  //         reference:references
   //       },
   //     },
   //   });
   // };
-
   const handleGenerateResume = () => {
     // Prepare the resume data
     const resumeData = {
+        
           education: educationFields,
           skills: skillsFields,
-          projects: projectsFields,
+        //   certifications:CertificationsFields,
+        //   languages: languagesFields,
+        //   internships: internshipsFields,
+        //   projects: projectsFields,
           experience:experienceFields,
-          experties:expertiesFields,
+          reference:references
     };
   
     // Get Firestore instance
@@ -110,22 +127,22 @@ const CreativeInput = () => {
         console.error("Error saving data: ", error);
       });
   
-
-    navigate("/creative_flair", {
+    navigate("/bold_statement", {
       state: {
         resumeData: {
-          ...personalDetails,
+         ...personalDetails,
           education: educationFields,
           skills: skillsFields,
-          projects: projectsFields,
+        //   certifications:CertificationsFields,
+        //   languages: languagesFields,
+        //   internships: internshipsFields,
+        //   projects: projectsFields,
           experience:experienceFields,
-          experties:expertiesFields,
+          reference:references
         },
       },
     });
   };
-  
-
   return (
     <div className="max-w-4xl mx-auto p-6 bg-gray-100 rounded shadow">
       <h2 className="text-2xl font-bold mb-4">Resume Input Form</h2>
@@ -176,27 +193,6 @@ const CreativeInput = () => {
             value={personalDetails.phone}
             onChange={(e) => setPersonalDetails({ ...personalDetails, phone: e.target.value })}
           />
-          <input
-            className="w-full p-2 border border-gray-300 rounded mb-2"
-            type="text"
-            placeholder="Instagram Link"
-            value={personalDetails.instagram}
-            onChange={(e) => setPersonalDetails({ ...personalDetails, instagram: e.target.value })}
-          />
-          <input
-            className="w-full p-2 border border-gray-300 rounded mb-2"
-            type="text"
-            placeholder="Country"
-            value={personalDetails.country}
-            onChange={(e) => setPersonalDetails({ ...personalDetails, country: e.target.value })}
-          />
-          <input
-            className="w-full p-2 border border-gray-300 rounded mb-2"
-            type="text"
-            placeholder="City"
-            value={personalDetails.city}
-            onChange={(e) => setPersonalDetails({ ...personalDetails, city: e.target.value })}
-          />
           <textarea
             className="w-full p-2 border border-gray-300 rounded mb-2"
             placeholder="Summary"
@@ -204,6 +200,45 @@ const CreativeInput = () => {
             onChange={(e) => setPersonalDetails({ ...personalDetails, summary: e.target.value })}
           />
         </div>
+        <div>
+      <h3 className="text-xl font-semibold">References</h3>
+      {references.map((ref) => (
+        <div key={ref.id} className="space-y-2 mb-2">
+          <input
+            className="w-full p-2 border border-gray-300 rounded"
+            type="text"
+            placeholder="Name"
+            value={ref.name}
+            onChange={(e) =>
+              updateReference(ref.id, "name", e.target.value)
+            }
+          />
+          <input
+            className="w-full p-2 border border-gray-300 rounded"
+            type="text"
+            placeholder="Contact Number"
+            value={ref.contact}
+            onChange={(e) =>
+              updateReference(ref.id, "contact", e.target.value)
+            }
+          />
+          <button
+            type="button"
+            onClick={() => deleteReference(ref.id)}
+            className="bg-red-500 text-white p-2 rounded"
+          >
+            Delete
+          </button>
+        </div>
+      ))}
+      <button
+        type="button"
+        onClick={addReference}
+        className="bg-blue-500 text-white p-2 rounded"
+      >
+        Add Reference
+      </button>
+    </div>
 
         {/* Education Section */}
         <div>
@@ -255,69 +290,60 @@ const CreativeInput = () => {
             Add Education
           </button>
         </div>
-
-        {/* Skills Section */}
-        <div>
-          <h3 className="text-xl font-semibold">Skills</h3>
-          {skillsFields.map((field) => (
-            <div key={field.id} className="space-y-2 mb-2">
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Skill"
-                value={field.skill}
-                onChange={(e) => {
-                  const updatedFields = skillsFields.map((f) =>
-                    f.id === field.id ? { ...f, skill: e.target.value } : f
-                  );
-                  setSkillsFields(updatedFields);
-                }}
-              />
-              <button type="button" onClick={() => deleteField(skillsFields, setSkillsFields, field.id)}>
-                Delete
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={addSkill} className="bg-blue-500 text-white p-2 rounded">
-            Add Skill
-          </button>
-        </div>
-
-        <div>
-  <h3 className="text-xl font-semibold">Area of Expertise</h3>
-  {expertiesFields.map((field) => (
+<div>
+  <h3 className="text-xl font-semibold">Skills</h3>
+  {skillsFields.map((field) => (
     <div key={field.id} className="space-y-2 mb-2">
+      {/* Input for Skill */}
       <input
         className="w-full p-2 border border-gray-300 rounded"
         type="text"
-        placeholder="Expertise"
-        value={field.experties}
+        placeholder="Skill"
+        value={field.skill}
         onChange={(e) => {
-          const updatedFields = expertiesFields.map((f) =>
-            f.id === field.id ? { ...f, experties: e.target.value } : f
+          const updatedFields = skillsFields.map((f) =>
+            f.id === field.id ? { ...f, skill: e.target.value } : f
           );
-          setExpertiesFields(updatedFields);
+          setSkillsFields(updatedFields);
         }}
       />
+      {/* Dropdown for Level */}
+      <select
+        className="w-full p-2 border border-gray-300 rounded"
+        value={field.level}
+        onChange={(e) => {
+          const updatedFields = skillsFields.map((f) =>
+            f.id === field.id ? { ...f, level: e.target.value } : f
+          );
+          setSkillsFields(updatedFields);
+        }}
+      >
+        <option value="" disabled>
+          Select Level
+        </option>
+        <option value="30">Beginner</option>
+        <option value="50">Intermediate</option>
+        <option value="100">Advanced</option>
+      </select>
+      {/* Delete Button */}
       <button
         type="button"
-        onClick={() => deleteField(expertiesFields, setExpertiesFields, field.id)}
+        onClick={() => deleteField(skillsFields, setSkillsFields, field.id)}
         className="bg-red-500 text-white p-2 rounded"
       >
         Delete
       </button>
     </div>
   ))}
+  {/* Add Skill Button */}
   <button
     type="button"
-    onClick={addExperties}
+    onClick={addSkill}
     className="bg-blue-500 text-white p-2 rounded"
   >
-    Add Expertise
+    Add Skill
   </button>
 </div>
-
-
 
         <div>
       <h3 className="text-xl font-semibold">Experience</h3>
@@ -399,57 +425,6 @@ const CreativeInput = () => {
         Add Experience
       </button>
     </div>
-        {/* Projects Section */}
-        <div>
-          <h3 className="text-xl font-semibold">Projects</h3>
-          {projectsFields.map((field) => (
-            <div key={field.id} className="space-y-2 mb-2">
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Project Name"
-                value={field.projectName}
-                onChange={(e) => {
-                  const updatedFields = projectsFields.map((f) =>
-                    f.id === field.id ? { ...f, projectName: e.target.value } : f
-                  );
-                  setProjectsFields(updatedFields);
-                }}
-              />
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Year"
-                value={field.projectYear}
-                onChange={(e) => {
-                  const updatedFields = projectsFields.map((f) =>
-                    f.id === field.id ? { ...f, projectYear: e.target.value } : f
-                  );
-                  setProjectsFields(updatedFields);
-                }}
-              />
-              <textarea
-                className="w-full p-2 border border-gray-300 rounded"
-                placeholder="Project Description"
-                value={field.projectDesc}
-                onChange={(e) => {
-                  const updatedFields = projectsFields.map((f) =>
-                    f.id === field.id ? { ...f, projectDesc: e.target.value } : f
-                  );
-                  setProjectsFields(updatedFields);
-                }}
-              />
-              <button type="button" onClick={() => deleteField(projectsFields, setProjectsFields, field.id)}>
-                Delete
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={addProject} className="bg-blue-500 text-white p-2 rounded">
-            Add Project
-          </button>
-        </div>
-
-        {/* Final Submit Button */}
         <div className="text-center">
           <button type="button" onClick={handleGenerateResume} className="bg-green-500 text-white p-4 rounded">
             Generate Resume
@@ -460,4 +435,4 @@ const CreativeInput = () => {
   );
 };
 
-export default CreativeInput;
+export default BoldInput;

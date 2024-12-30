@@ -25,6 +25,10 @@ import Creative from './COMPONENTS/creative_flair'
 import TechInput from './COMPONENTS/Tech_input'
 import Tech from './COMPONENTS/Tech_Savvy'
 import MinimalistInput from './COMPONENTS/Minimalist_input'
+import ClassicInput from './COMPONENTS/Classic_input'
+import Classic from './COMPONENTS/classic'
+import BoldInput from './COMPONENTS/Bold_input'
+import Bold from './COMPONENTS/bold_statement'
 function App() {
   const route= createBrowserRouter([
     { path: "/",
@@ -95,7 +99,18 @@ function App() {
       element: <>  <Tech/> </> 
     },
    
-
+    { path: "/Bold_input",
+    element: <> <Navbar/> <BoldInput/> <Footer/> </> 
+  },
+  { path: "/bold_statement",
+    element: <>  <Bold/> </> 
+  },
+  { path: "/Classic_input",
+    element: <> <Navbar/> < ClassicInput/> <Footer/> </> 
+  },
+  { path: "/classic",
+    element: <>  <Classic/> </> 
+  },
 
   
 

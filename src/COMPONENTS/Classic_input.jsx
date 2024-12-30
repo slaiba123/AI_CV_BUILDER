@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate,useLocation } from "react-router-dom";
 import { doc, setDoc, collection, getDocs, addDoc , getFirestore} from 'firebase/firestore';
 import { db } from '../firebase';
-const CreativeInput = () => {
+const ClassicInput = () => {
   const navigate = useNavigate();
   const location = useLocation(); // Access location
   const { template } = location.state || {};
@@ -14,55 +14,49 @@ const CreativeInput = () => {
     firstName: '',
     lastName: '',
     email: '',
-    instagram:'',
     phone: '',
+    linkedin: '',
     country: '',
     city: '',
-    summary: '',
   });
 
   // State for other sections
   const [educationFields, setEducationFields] = useState([]);
   const [skillsFields, setSkillsFields] = useState([]);
-  const [expertiesFields, setExpertiesFields] = useState([]);
-//   const [coursesFields, setCoursesFields] = useState([]);
-//   const [languagesFields, setLanguagesFields] = useState([]);
-//   const [internshipsFields, setInternshipsFields] = useState([]);
-//   const [CertificationsFields, setCertificationsFields] = useState([]);
-  const [projectsFields, setProjectsFields] = useState([]);
+  const [coursesFields, setCoursesFields] = useState([]);
+  const [languagesFields, setLanguagesFields] = useState([]);
+  const [CertificationsFields, setCertificationsFields] = useState([]);
   const [experienceFields, setexperienceFields] = useState([]);
+  const [achievementFields, setAchievementsFields] = useState([]);
+  const [strengthFields, setStrengthsFields] = useState([]);
 
   // Add methods for each section
   const addEducation = () => {
-    setEducationFields([...educationFields, { id: Date.now(), degree: '', institution: '', year: '' }]);
+    setEducationFields([...educationFields, { id: Date.now(), degree: '', institution: '', year: '',grade: '' }]);
   };
 
   const addSkill = () => {
     setSkillsFields([...skillsFields, { id: Date.now(), skill: '' }]);
   };
-  const addExperties = () => {
-    setExpertiesFields([...expertiesFields, { id: Date.now(), experties: '' }]);
+  const addAchievement = () => {
+    setAchievementsFields([...achievementFields, { id: Date.now(), achievement: '' }]);
+  };
+  const addStrength = () => {
+    setStrengthsFields([...strengthFields, { id: Date.now(), strength: '' }]);
   };
 
+  const addCertifications = () => {
+    setCertificationsFields([...CertificationsFields, { id: Date.now(), course: '', institution: '', year: '' }]);
+  };
 
-//   const addCertifications = () => {
-//     setCertificationsFields([...CertificationsFields, { id: Date.now(), course: '', institution: '', year: '' }]);
-//   };
+  const addLanguage = () => {
+    setLanguagesFields([...languagesFields, { id: Date.now(), language: '', proficiency: '' }]);
+  };
 
-//   const addLanguage = () => {
-//     setLanguagesFields([...languagesFields, { id: Date.now(), language: '', proficiency: '' }]);
-//   };
-
-//   const addInternship = () => {
-//     setInternshipsFields([...internshipsFields, { id: Date.now(), company: '', role: '', startDate: '', endDate: '', description: '' }]);
-//   };
   const addexperience = () => {
     setexperienceFields([...experienceFields, { id: Date.now(), company: '', role: '', startDate: '', endDate: '', description: '' }]);
   };
 
-  const addProject = () => {
-    setProjectsFields([...projectsFields, { id: Date.now(), projectName: '', projectYear: '', projectDesc: '' }]);
-  };
 
   const deleteField = (fields, setFields, id) => {
     setFields(fields.filter((field) => field.id !== id));
@@ -74,28 +68,32 @@ const CreativeInput = () => {
   };
 
   // const handleGenerateResume = () => {
-  //   navigate(`/creative_flair`, {
+  //   navigate(`/classic`, {
   //     state: {
   //       resumeData: {
   //         ...personalDetails,
   //         education: educationFields,
   //         skills: skillsFields,
-  //         projects: projectsFields,
+  //         certifications:CertificationsFields,
+  //         languages: languagesFields,
   //         experience:experienceFields,
-  //         experties:expertiesFields,
+  //         achievement:achievementFields,
+  //         strength:strengthFields
+
   //       },
   //     },
   //   });
   // };
-
   const handleGenerateResume = () => {
     // Prepare the resume data
     const resumeData = {
-          education: educationFields,
-          skills: skillsFields,
-          projects: projectsFields,
-          experience:experienceFields,
-          experties:expertiesFields,
+              education: educationFields,
+              skills: skillsFields,
+              certifications:CertificationsFields,
+              languages: languagesFields,
+              experience:experienceFields,
+              achievement:achievementFields,
+              strength:strengthFields
     };
   
     // Get Firestore instance
@@ -110,22 +108,22 @@ const CreativeInput = () => {
         console.error("Error saving data: ", error);
       });
   
-
-    navigate("/creative_flair", {
+    // Navigate to the 'tech-savvy' page, passing the resume data in state
+    navigate("/classic", {
       state: {
         resumeData: {
-          ...personalDetails,
-          education: educationFields,
-          skills: skillsFields,
-          projects: projectsFields,
-          experience:experienceFields,
-          experties:expertiesFields,
+                  ...personalDetails,
+                  education: educationFields,
+                  skills: skillsFields,
+                  certifications:CertificationsFields,
+                  languages: languagesFields,
+                  experience:experienceFields,
+                  achievement:achievementFields,
+                  strength:strengthFields
         },
       },
     });
   };
-  
-
   return (
     <div className="max-w-4xl mx-auto p-6 bg-gray-100 rounded shadow">
       <h2 className="text-2xl font-bold mb-4">Resume Input Form</h2>
@@ -179,9 +177,9 @@ const CreativeInput = () => {
           <input
             className="w-full p-2 border border-gray-300 rounded mb-2"
             type="text"
-            placeholder="Instagram Link"
-            value={personalDetails.instagram}
-            onChange={(e) => setPersonalDetails({ ...personalDetails, instagram: e.target.value })}
+            placeholder="Linkedin URL"
+            value={personalDetails.linkedin}
+            onChange={(e) => setPersonalDetails({ ...personalDetails, linkedin: e.target.value })}
           />
           <input
             className="w-full p-2 border border-gray-300 rounded mb-2"
@@ -197,12 +195,12 @@ const CreativeInput = () => {
             value={personalDetails.city}
             onChange={(e) => setPersonalDetails({ ...personalDetails, city: e.target.value })}
           />
-          <textarea
+          {/* <textarea
             className="w-full p-2 border border-gray-300 rounded mb-2"
             placeholder="Summary"
             value={personalDetails.summary}
             onChange={(e) => setPersonalDetails({ ...personalDetails, summary: e.target.value })}
-          />
+          /> */}
         </div>
 
         {/* Education Section */}
@@ -230,6 +228,18 @@ const CreativeInput = () => {
                 onChange={(e) => {
                   const updatedFields = educationFields.map((f) =>
                     f.id === field.id ? { ...f, institution: e.target.value } : f
+                  );
+                  setEducationFields(updatedFields);
+                }}
+              />
+               <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Grade/CGPA"
+                value={field.grade}
+                onChange={(e) => {
+                  const updatedFields = educationFields.map((f) =>
+                    f.id === field.id ? { ...f, grade: e.target.value } : f
                   );
                   setEducationFields(updatedFields);
                 }}
@@ -283,41 +293,149 @@ const CreativeInput = () => {
           </button>
         </div>
 
+        {/* Courses Section */}
         <div>
-  <h3 className="text-xl font-semibold">Area of Expertise</h3>
-  {expertiesFields.map((field) => (
-    <div key={field.id} className="space-y-2 mb-2">
-      <input
-        className="w-full p-2 border border-gray-300 rounded"
-        type="text"
-        placeholder="Expertise"
-        value={field.experties}
-        onChange={(e) => {
-          const updatedFields = expertiesFields.map((f) =>
-            f.id === field.id ? { ...f, experties: e.target.value } : f
-          );
-          setExpertiesFields(updatedFields);
-        }}
-      />
-      <button
-        type="button"
-        onClick={() => deleteField(expertiesFields, setExpertiesFields, field.id)}
-        className="bg-red-500 text-white p-2 rounded"
-      >
-        Delete
-      </button>
-    </div>
-  ))}
-  <button
-    type="button"
-    onClick={addExperties}
-    className="bg-blue-500 text-white p-2 rounded"
-  >
-    Add Expertise
-  </button>
-</div>
+          <h3 className="text-xl font-semibold">Certifications</h3>
+          {CertificationsFields.map((field) => (
+            <div key={field.id} className="space-y-2 mb-2">
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Certification"
+                value={field.Certification}
+                onChange={(e) => {
+                  const updatedFields = CertificationsFields.map((f) =>
+                    f.id === field.id ? { ...f, course: e.target.value } : f
+                  );
+                  setCertificationsFields(updatedFields);
+                }}
+              />
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Institution"
+                value={field.institution}
+                onChange={(e) => {
+                  const updatedFields = CertificationsFields.map((f) =>
+                    f.id === field.id ? { ...f, institution: e.target.value } : f
+                  );
+                  setCertificationsFields(updatedFields);
+                }}
+              />
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Year"
+                value={field.year}
+                onChange={(e) => {
+                  const updatedFields = CertificationsFields.map((f) =>
+                    f.id === field.id ? { ...f, year: e.target.value } : f
+                  );
+                  setCertificationsFields(updatedFields);
+                }}
+              />
+              <button type="button" onClick={() => deleteField(CertificationsFields, setCertificationsFields, field.id)}>
+                Delete
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addCertifications} className="bg-blue-500 text-white p-2 rounded">
+            Add Certification
+          </button>
+        </div>
 
-
+        {/* Languages Section */}
+        <div>
+          <h3 className="text-xl font-semibold">Languages</h3>
+          {languagesFields.map((field) => (
+            <div key={field.id} className="space-y-2 mb-2">
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Language"
+                value={field.language}
+                onChange={(e) => {
+                  const updatedFields = languagesFields.map((f) =>
+                    f.id === field.id ? { ...f, language: e.target.value } : f
+                  );
+                  setLanguagesFields(updatedFields);
+                }}
+              />
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Proficiency"
+                value={field.proficiency}
+                onChange={(e) => {
+                  const updatedFields = languagesFields.map((f) =>
+                    f.id === field.id ? { ...f, proficiency: e.target.value } : f
+                  );
+                  setLanguagesFields(updatedFields);
+                }}
+              />
+              <button type="button" onClick={() => deleteField(languagesFields, setLanguagesFields, field.id)}>
+                Delete
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addLanguage} className="bg-blue-500 text-white p-2 rounded">
+            Add Language
+          </button>
+        </div>
+        {/* Achievements Section */}
+        <div>
+          <h3 className="text-xl font-semibold">Achievements</h3>
+          {achievementFields.map((field) => (
+            <div key={field.id} className="space-y-2 mb-2">
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="achievement"
+                value={field.achievement}
+                onChange={(e) => {
+                  const updatedFields = achievementFields.map((f) =>
+                    f.id === field.id ? { ...f, achievement: e.target.value } : f
+                  );
+                  setAchievementsFields(updatedFields);
+                }}
+              />
+    
+              <button type="button" onClick={() => deleteField(languagesFields, setAchievementsFields, field.id)}>
+                Delete
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addAchievement} className="bg-blue-500 text-white p-2 rounded">
+            Add Achievement
+          </button>
+        </div>
+       
+        {/* Strengths Section */}
+        <div>
+          <h3 className="text-xl font-semibold">Strengths</h3>
+          {strengthFields.map((field) => (
+            <div key={field.id} className="space-y-2 mb-2">
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Strengths"
+                value={field.strength}
+                onChange={(e) => {
+                  const updatedFields = strengthFields.map((f) =>
+                    f.id === field.id ? { ...f, strength: e.target.value } : f
+                  );
+                  setStrengthsFields(updatedFields);
+                }}
+              />
+              <button type="button" onClick={() => deleteField(languagesFields, setStrengthsFields, field.id)}>
+                Delete
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addStrength } className="bg-blue-500 text-white p-2 rounded">
+            Add Strength
+          </button>
+        </div>
 
         <div>
       <h3 className="text-xl font-semibold">Experience</h3>
@@ -399,55 +517,7 @@ const CreativeInput = () => {
         Add Experience
       </button>
     </div>
-        {/* Projects Section */}
-        <div>
-          <h3 className="text-xl font-semibold">Projects</h3>
-          {projectsFields.map((field) => (
-            <div key={field.id} className="space-y-2 mb-2">
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Project Name"
-                value={field.projectName}
-                onChange={(e) => {
-                  const updatedFields = projectsFields.map((f) =>
-                    f.id === field.id ? { ...f, projectName: e.target.value } : f
-                  );
-                  setProjectsFields(updatedFields);
-                }}
-              />
-              <input
-                className="w-full p-2 border border-gray-300 rounded"
-                type="text"
-                placeholder="Year"
-                value={field.projectYear}
-                onChange={(e) => {
-                  const updatedFields = projectsFields.map((f) =>
-                    f.id === field.id ? { ...f, projectYear: e.target.value } : f
-                  );
-                  setProjectsFields(updatedFields);
-                }}
-              />
-              <textarea
-                className="w-full p-2 border border-gray-300 rounded"
-                placeholder="Project Description"
-                value={field.projectDesc}
-                onChange={(e) => {
-                  const updatedFields = projectsFields.map((f) =>
-                    f.id === field.id ? { ...f, projectDesc: e.target.value } : f
-                  );
-                  setProjectsFields(updatedFields);
-                }}
-              />
-              <button type="button" onClick={() => deleteField(projectsFields, setProjectsFields, field.id)}>
-                Delete
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={addProject} className="bg-blue-500 text-white p-2 rounded">
-            Add Project
-          </button>
-        </div>
+       
 
         {/* Final Submit Button */}
         <div className="text-center">
@@ -460,4 +530,4 @@ const CreativeInput = () => {
   );
 };
 
-export default CreativeInput;
+export default ClassicInput;

@@ -41,7 +41,7 @@ const CreativeInput = () => {
     setSkillsFields([...skillsFields, { id: Date.now(), skill: '' }]);
   };
   const addExperties = () => {
-    setExpertiesFields([...expertiesFields, { id: Date.now(), experties: '' }]);
+    setExpertiesFields([...expertiesFields, { id: Date.now(), skill: '' }]);
   };
 
 
@@ -74,6 +74,7 @@ const CreativeInput = () => {
   };
 
   // const handleGenerateResume = () => {
+    
   //   navigate(`/creative_flair`, {
   //     state: {
   //       resumeData: {
@@ -81,21 +82,18 @@ const CreativeInput = () => {
   //         education: educationFields,
   //         skills: skillsFields,
   //         projects: projectsFields,
-  //         experience:experienceFields,
-  //         experties:expertiesFields,
+  //         experience:experienceFields
   //       },
   //     },
   //   });
   // };
-
   const handleGenerateResume = () => {
     // Prepare the resume data
     const resumeData = {
-          education: educationFields,
-          skills: skillsFields,
-          projects: projectsFields,
-          experience:experienceFields,
-          experties:expertiesFields,
+      education: educationFields,
+      skills: skillsFields,
+      projects: projectsFields,
+      experience: experienceFields
     };
   
     // Get Firestore instance
@@ -110,7 +108,7 @@ const CreativeInput = () => {
         console.error("Error saving data: ", error);
       });
   
-
+    // Navigate to the 'tech-savvy' page, passing the resume data in state
     navigate("/creative_flair", {
       state: {
         resumeData: {
@@ -118,13 +116,11 @@ const CreativeInput = () => {
           education: educationFields,
           skills: skillsFields,
           projects: projectsFields,
-          experience:experienceFields,
-          experties:expertiesFields,
+          experience: experienceFields
         },
       },
     });
   };
-  
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-gray-100 rounded shadow">
@@ -283,42 +279,197 @@ const CreativeInput = () => {
           </button>
         </div>
 
+        {/* Experties Section */}
         <div>
-  <h3 className="text-xl font-semibold">Area of Expertise</h3>
-  {expertiesFields.map((field) => (
-    <div key={field.id} className="space-y-2 mb-2">
-      <input
-        className="w-full p-2 border border-gray-300 rounded"
-        type="text"
-        placeholder="Expertise"
-        value={field.experties}
-        onChange={(e) => {
-          const updatedFields = expertiesFields.map((f) =>
-            f.id === field.id ? { ...f, experties: e.target.value } : f
-          );
-          setExpertiesFields(updatedFields);
-        }}
-      />
-      <button
-        type="button"
-        onClick={() => deleteField(expertiesFields, setExpertiesFields, field.id)}
-        className="bg-red-500 text-white p-2 rounded"
-      >
-        Delete
-      </button>
-    </div>
-  ))}
-  <button
-    type="button"
-    onClick={addExperties}
-    className="bg-blue-500 text-white p-2 rounded"
-  >
-    Add Expertise
-  </button>
-</div>
+          <h3 className="text-xl font-semibold">Area of Experties</h3>
+          {expertiesFields.map((field) => (
+            <div key={field.id} className="space-y-2 mb-2">
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Experties"
+                value={field.experties}
+                onChange={(e) => {
+                  const updatedFields = skillsFields.map((f) =>
+                    f.id === field.id ? { ...f, experties: e.target.value } : f
+                  );
+                  setExpertiesFields(updatedFields);
+                }}
+              />
+              <button type="button" onClick={() => deleteField(expertiesFields, setExpertiesFields, field.id)}>
+                Delete
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addExperties} className="bg-blue-500 text-white p-2 rounded">
+            Add Experties
+          </button>
+        </div>
 
 
+        {/* Courses Section
+        <div>
+          <h3 className="text-xl font-semibold">Certifications</h3>
+          {CertificationsFields.map((field) => (
+            <div key={field.id} className="space-y-2 mb-2">
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Certification"
+                value={field.Certification}
+                onChange={(e) => {
+                  const updatedFields = CertificationsFields.map((f) =>
+                    f.id === field.id ? { ...f, course: e.target.value } : f
+                  );
+                  setCertificationsFields(updatedFields);
+                }}
+              />
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Institution"
+                value={field.institution}
+                onChange={(e) => {
+                  const updatedFields = CertificationsFields.map((f) =>
+                    f.id === field.id ? { ...f, institution: e.target.value } : f
+                  );
+                  setCertificationsFields(updatedFields);
+                }}
+              />
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Year"
+                value={field.year}
+                onChange={(e) => {
+                  const updatedFields = CertificationsFields.map((f) =>
+                    f.id === field.id ? { ...f, year: e.target.value } : f
+                  );
+                  setCertificationsFields(updatedFields);
+                }}
+              />
+              <button type="button" onClick={() => deleteField(CertificationsFields, setCertificationsFields, field.id)}>
+                Delete
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addCertifications} className="bg-blue-500 text-white p-2 rounded">
+            Add Certification
+          </button>
+        </div> */}
 
+        {/* Languages Section
+        <div>
+          <h3 className="text-xl font-semibold">Languages</h3>
+          {languagesFields.map((field) => (
+            <div key={field.id} className="space-y-2 mb-2">
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Language"
+                value={field.language}
+                onChange={(e) => {
+                  const updatedFields = languagesFields.map((f) =>
+                    f.id === field.id ? { ...f, language: e.target.value } : f
+                  );
+                  setLanguagesFields(updatedFields);
+                }}
+              />
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Proficiency"
+                value={field.proficiency}
+                onChange={(e) => {
+                  const updatedFields = languagesFields.map((f) =>
+                    f.id === field.id ? { ...f, proficiency: e.target.value } : f
+                  );
+                  setLanguagesFields(updatedFields);
+                }}
+              />
+              <button type="button" onClick={() => deleteField(languagesFields, setLanguagesFields, field.id)}>
+                Delete
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addLanguage} className="bg-blue-500 text-white p-2 rounded">
+            Add Language
+          </button>
+        </div> */}
+
+        {/* Internships Section
+        <div>
+          <h3 className="text-xl font-semibold">Internships</h3>
+          {internshipsFields.map((field) => (
+            <div key={field.id} className="space-y-2 mb-2">
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Company"
+                value={field.company}
+                onChange={(e) => {
+                  const updatedFields = internshipsFields.map((f) =>
+                    f.id === field.id ? { ...f, company: e.target.value } : f
+                  );
+                  setInternshipsFields(updatedFields);
+                }}
+              />
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Role"
+                value={field.role}
+                onChange={(e) => {
+                  const updatedFields = internshipsFields.map((f) =>
+                    f.id === field.id ? { ...f, role: e.target.value } : f
+                  );
+                  setInternshipsFields(updatedFields);
+                }}
+              />
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="Start Date"
+                value={field.startDate}
+                onChange={(e) => {
+                  const updatedFields = internshipsFields.map((f) =>
+                    f.id === field.id ? { ...f, startDate: e.target.value } : f
+                  );
+                  setInternshipsFields(updatedFields);
+                }}
+              />
+              <input
+                className="w-full p-2 border border-gray-300 rounded"
+                type="text"
+                placeholder="End Date"
+                value={field.endDate}
+                onChange={(e) => {
+                  const updatedFields = internshipsFields.map((f) =>
+                    f.id === field.id ? { ...f, endDate: e.target.value } : f
+                  );
+                  setInternshipsFields(updatedFields);
+                }}
+              />
+              <textarea
+                className="w-full p-2 border border-gray-300 rounded"
+                placeholder="Description"
+                value={field.description}
+                onChange={(e) => {
+                  const updatedFields = internshipsFields.map((f) =>
+                    f.id === field.id ? { ...f, description: e.target.value } : f
+                  );
+                  setInternshipsFields(updatedFields);
+                }}
+              />
+              <button type="button" onClick={() => deleteField(internshipsFields, setInternshipsFields, field.id)}>
+                Delete
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addInternship} className="bg-blue-500 text-white p-2 rounded">
+            Add Internship
+          </button>
+        </div> */}
         <div>
       <h3 className="text-xl font-semibold">Experience</h3>
       {experienceFields.map((field) => (
@@ -384,7 +535,7 @@ const CreativeInput = () => {
           />
           <button
             type="button"
-            onClick={() => deleteField(experienceFields, setexperienceFields, field.id)}
+            onClick={() => deleteField(experienceFields, setExperienceFields, field.id)}
             className="text-red-500"
           >
             Delete

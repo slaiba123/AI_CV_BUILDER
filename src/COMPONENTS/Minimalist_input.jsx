@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate,useLocation } from "react-router-dom";
-
+import { doc, setDoc, collection, getDocs, addDoc , getFirestore} from 'firebase/firestore';
+import { db } from '../firebase';
 const MinimalistInput = () => {
   const navigate = useNavigate();
   const location = useLocation(); // Access location
@@ -66,23 +67,59 @@ const MinimalistInput = () => {
     console.log({ personalDetails, educationFields, skillsFields, coursesFields, languagesFields, internshipsFields, projectsFields });
   };
 
+  // const handleGenerateResume = () => {
+    
+  //   navigate("/Minimalist_focus", {
+  //     state: {
+  //       resumeData: {
+  //         ...personalDetails,
+  //         education: educationFields,
+  //         skills: skillsFields,
+  //         certifications:CertificationsFields,
+  //         languages: languagesFields,
+  //         internships: internshipsFields,
+  //         projects: projectsFields,
+  //         experience:experienceFields
+  //       },
+  //     },
+  //   });
+  // };
   const handleGenerateResume = () => {
+    // Prepare the resume data
+    const resumeData = {
+      education: educationFields,
+      skills: skillsFields,
+      certifications: CertificationsFields,
+      projects: projectsFields,
+      experience: experienceFields
+    };
+  
+    // Get Firestore instance
+  
+  
+    // Add data to Firestore
+    addDoc(collection(db, "resumes"), resumeData)
+      .then(() => {
+        console.log("Resume data saved!");
+      })
+      .catch((error) => {
+        console.error("Error saving data: ", error);
+      });
+  
+
     navigate("/Minimalist_focus", {
       state: {
         resumeData: {
           ...personalDetails,
           education: educationFields,
           skills: skillsFields,
-          certifications:CertificationsFields,
-          languages: languagesFields,
-          internships: internshipsFields,
+          certifications: CertificationsFields,
           projects: projectsFields,
-          experience:experienceFields
+          experience: experienceFields
         },
       },
     });
   };
-
   return (
     <div className="max-w-4xl mx-auto p-6 bg-gray-100 rounded shadow">
       <h2 className="text-2xl font-bold mb-4">Resume Input Form</h2>
